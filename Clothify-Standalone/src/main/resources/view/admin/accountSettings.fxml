@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.ecom.controller.admin.AccountSettingsFormController">
+   <left>
+      <AnchorPane prefHeight="558.0" prefWidth="130.0" style="-fx-background-color: #D9D9D9;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="29.0" layoutY="14.0" onMouseClicked="#btnLoadHomePageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/homepage.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="29.0" layoutY="78.0" onMouseClicked="#btnLoadAdminManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/admin.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="29.0" layoutY="143.0" onMouseClicked="#btnLoadEmployeeManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/employee.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="207.0" onMouseClicked="#btnLoadInventoryManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/inventory.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="279.0" onMouseClicked="#btnLoadSupplierManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/supplier.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="344.0" onMouseClicked="#btnLoadOrderDetailPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/checkout.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="411.0" onMouseClicked="#btnLoadReportManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/sales-report.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="474.0" prefWidth="554.0" style="-fx-background-color: #F6CDCD;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="137.0" layoutY="85.0" text="Enter Current Password" />
+            <JFXTextField fx:id="txtCurrentPassword" layoutX="137.0" layoutY="110.0" />
+            <Label layoutX="137.0" layoutY="169.0" text="Enter New Password" />
+            <JFXTextField fx:id="txtTempNewPassword" layoutX="137.0" layoutY="194.0" />
+            <Label layoutX="137.0" layoutY="244.0" text="Confirm New Password" />
+            <JFXTextField fx:id="txtNewPassword" layoutX="137.0" layoutY="269.0" />
+            <JFXButton layoutX="179.0" layoutY="355.0" onAction="#btnProceedOnAction" text="Proceed" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

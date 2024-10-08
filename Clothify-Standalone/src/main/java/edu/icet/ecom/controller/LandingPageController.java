@@ -9,7 +9,6 @@ import lombok.Getter;
 import java.io.IOException;
 
 public class LandingPageController {
-    @Getter
     public static Stage stage;
 
     public void btnLoadLoginFormOnAction(ActionEvent actionEvent) {
@@ -20,6 +19,10 @@ public class LandingPageController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static Stage getStage(){
+        return stage;
     }
 
 }

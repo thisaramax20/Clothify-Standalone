@@ -9,16 +9,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static edu.icet.ecom.controller.LandingPageController.stage;
+
 public class LoginFormController {
     public JFXTextField txtUsername;
     public Label lblPassword_OTP;
     public JFXTextField txtPassword;
+    public static Stage stage = LandingPageController.getStage();
 
     public void btnLoginOnAction(ActionEvent actionEvent) {
-        Stage stage = LandingPageController.stage;
         stage.close();
         try {
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../../../../view/superAdminDashBoard.fxml"))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../../../../view/superAdmin/superAdminDashBoard.fxml"))));
             stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
