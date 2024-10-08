@@ -18,7 +18,8 @@ public class LoginFormController {
         Stage stage = LandingPageController.stage;
         stage.close();
         try {
-            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource(""))));
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../../../../view/superAdminDashBoard.fxml"))));
+            stage.show();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

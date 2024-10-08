@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.ecom.controller.superAdmin.SuperAdminDashBoardFromController">
+   <left>
+      <AnchorPane prefHeight="400.0" prefWidth="129.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="29.0" layoutY="14.0" onMouseClicked="#btnLoadHomePageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/homepage.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="29.0" layoutY="78.0" onMouseClicked="#btnLoadAdminManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/admin.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="29.0" layoutY="143.0" onMouseClicked="#btnLoadEmployeeManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/employee.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="207.0" onMouseClicked="#btnLoadInventoryManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/inventory.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="279.0" onMouseClicked="#btnLoadSupplierManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/supplier.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="344.0" onMouseClicked="#btnLoadOrderDetailPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/checkout.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="411.0" onMouseClicked="#btnLoadReportManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/sales-report.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="474.0" prefWidth="77.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="18.0" layoutY="30.0" onMouseClicked="#btnLoadAccountSettingsPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/account.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="14.0" layoutY="389.0" onMouseClicked="#btnLogoutOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/logout.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </right>
+   <center>
+      <AnchorPane prefHeight="367.0" prefWidth="441.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="86.0" layoutY="27.0" text="WELCOME MANAGER">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="137.0" layoutY="65.0" text="Mr. Sheshan Thilakshana">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="274.0" fitWidth="391.0" layoutX="26.0" layoutY="126.0" pickOnBounds="true" AnchorPane.leftAnchor="25.600000000000023" AnchorPane.rightAnchor="23.80000000000001">
+               <image>
+                  <Image url="@../../assets/hero.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

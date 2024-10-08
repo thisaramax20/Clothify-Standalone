@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.ecom.controller.superAdmin.SupplierManagementSuperFormController">
+   <left>
+      <AnchorPane prefHeight="558.0" prefWidth="130.0" style="-fx-background-color: #D9D9D9;" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="29.0" layoutY="14.0" onMouseClicked="#btnLoadHomePageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/homepage.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="29.0" layoutY="78.0" onMouseClicked="#btnLoadAdminManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/admin.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="29.0" layoutY="143.0" onMouseClicked="#btnLoadEmployeeManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/employee.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="207.0" onMouseClicked="#btnLoadInventoryManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/inventory.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="279.0" onMouseClicked="#btnLoadSupplierManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/supplier.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="344.0" onMouseClicked="#btnLoadOrderDetailPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/checkout.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="411.0" onMouseClicked="#btnLoadReportManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../assets/sales-report.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="474.0" prefWidth="554.0" style="-fx-background-color: #F6CDCD;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="37.0" layoutY="7.0" text="NIC" />
+            <JFXTextField fx:id="txtNIC" layoutX="37.0" layoutY="21.0" />
+            <Label layoutX="216.0" layoutY="7.0" text="Name" />
+            <JFXTextField fx:id="txtName" layoutX="216.0" layoutY="21.0" />
+            <Label layoutX="37.0" layoutY="65.0" text="Company" />
+            <JFXTextField fx:id="txtCompany" layoutX="37.0" layoutY="79.0" />
+            <TableView fx:id="tblSupplier" layoutX="32.0" layoutY="114.0" prefHeight="118.0" prefWidth="415.0">
+               <columns>
+                  <TableColumn fx:id="colID" prefWidth="50.39990234375" text="ID" />
+                  <TableColumn fx:id="colNIC" prefWidth="116.79999542236328" text="NIC" />
+                  <TableColumn fx:id="colName" prefWidth="126.4000244140625" text="Name" />
+                  <TableColumn fx:id="colCompany" prefWidth="121.5999755859375" text="Company" />
+               </columns>
+            </TableView>
+            <JFXButton layoutX="33.0" layoutY="442.0" onAction="#btnAddItemOnAction" prefHeight="26.0" prefWidth="69.0" text="Add" />
+            <JFXButton layoutX="111.0" layoutY="442.0" onAction="#btnDeleteItemOnAction" prefHeight="26.0" prefWidth="69.0" text="Delete" />
+            <JFXButton layoutX="181.0" layoutY="442.0" onAction="#btnUpdateItemOnAction" prefHeight="26.0" prefWidth="69.0" text="Update" />
+            <JFXButton layoutX="259.0" layoutY="442.0" onAction="#btnSearchItemOnAction" prefHeight="26.0" prefWidth="69.0" text="Search" />
+            <JFXButton layoutX="335.0" layoutY="442.0" onAction="#btnClearFieldsOnAction" prefHeight="26.0" prefWidth="69.0" text="Clear" />
+            <JFXButton layoutX="30.0" layoutY="234.0" onAction="#btnAddSupplierOnAction" prefHeight="26.0" prefWidth="69.0" text="Add" />
+            <JFXButton layoutX="108.0" layoutY="234.0" onAction="#btnDeleteSupplierOnAction" prefHeight="26.0" prefWidth="69.0" text="Delete" />
+            <JFXButton layoutX="178.0" layoutY="234.0" onAction="#btnUpdateSupplierOnAction" prefHeight="26.0" prefWidth="69.0" text="Update" />
+            <JFXButton layoutX="256.0" layoutY="234.0" onAction="#btnSearchSupplierOnAction" prefHeight="26.0" prefWidth="69.0" text="Search" />
+            <JFXButton layoutX="332.0" layoutY="234.0" onAction="#btnClearFieldsOnAction" prefHeight="26.0" prefWidth="69.0" text="Clear" />
+            <Label layoutX="37.0" layoutY="265.0" text="Supplier ID" />
+            <Label layoutX="216.0" layoutY="265.0" text="Item Name" />
+            <JFXTextField fx:id="txtItemName" layoutX="216.0" layoutY="286.0" />
+            <JFXComboBox fx:id="cmbSupplierId" layoutX="35.0" layoutY="286.0" />
+            <Line endX="381.0000305175781" layoutX="91.0" layoutY="257.0" startX="-62.199989318847656" />
+            <TableView fx:id="tblItemSupplier" layoutX="25.0" layoutY="318.0" prefHeight="118.0" prefWidth="422.0">
+               <columns>
+                  <TableColumn fx:id="colSupplierID" prefWidth="101.59992027282715" text="Supplier ID" />
+                  <TableColumn fx:id="colItemCode" prefWidth="105.60009765625" text="Item Code" />
+                  <TableColumn fx:id="colItemName" prefWidth="109.60003662109375" text="Name" />
+                  <TableColumn fx:id="colItemCategory" prefWidth="106.39996337890625" text="Category" />
+               </columns>
+            </TableView>
+            <Label layoutX="376.0" layoutY="263.0" text="Item Category" />
+            <JFXComboBox fx:id="cmbItemCategory" layoutX="374.0" layoutY="284.0" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
