@@ -1,15 +1,16 @@
 package edu.icet.ecom.repository.custom.impl;
 
 import edu.icet.ecom.entity.Employee;
-import edu.icet.ecom.repository.custom.EmployeeDao;
+import edu.icet.ecom.entity.Inventory;
+import edu.icet.ecom.repository.custom.InventoryDao;
 import edu.icet.ecom.util.HibernateUtil;
 import org.hibernate.Session;
 
 import java.util.List;
 
-public class EmployeeDaoImpl implements EmployeeDao {
+public class InventoryDaoImpl implements InventoryDao {
     @Override
-    public boolean save(Employee entity) {
+    public boolean save(Inventory entity) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
         session.persist(entity);
@@ -22,49 +23,54 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public boolean delete(Integer id) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Employee employee = session.get(Employee.class, id);
-        session.remove(employee);
+        Inventory inventory = session.get(Inventory.class, id);
+        session.remove(inventory);
         session.getTransaction().commit();
         session.close();
         return true;
     }
 
     @Override
-    public boolean update(Employee entity,Integer id) {
+    public boolean update(Inventory entity, Integer id) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Employee employee = session.get(Employee.class, id);
-        employee.setNic(entity.getNic());
-        employee.setName(entity.getName());
-        employee.setAddress(entity.getAddress());
-        employee.setDob(entity.getDob());
-        employee.setEmail(entity.getEmail());
-        session.merge(employee);
+        Inventory inventory = session.get(Inventory.class, id);
+        inventory.setCategory(entity.getCategory());
+        inventory.setName(entity.getName());
+        inventory.setQuantity(entity.getQuantity());
+        inventory.setSize(entity.getSize());
+        inventory.setPrice(entity.getPrice());
+        session.merge(inventory);
         session.getTransaction().commit();
         session.close();
         return true;
     }
 
     @Override
-    public List<Employee> getAll() {
+    public List<Inventory> getAll() {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        List<Employee> resultList = session.createQuery("SELECT a FROM Employee a", Employee.class).getResultList();
+        List<Inventory> resultList = session.createQuery("SELECT a FROM Inventory a", Inventory.class).getResultList();
         session.close();
         return resultList;
     }
 
     @Override
-    public Employee getById(Integer id) {
+    public Inventory getById(Integer id) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Employee employee = session.find(Employee.class, id);
+        Inventory inventory = session.find(Inventory.class, id);
         session.close();
-        return employee;
+        return inventory;
     }
 
     @Override
     public byte[] getImageData(Integer id) {
-        return null;
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Inventory inventory = session.find(Inventory.class, id);
+        byte[] imageData = inventory.getImageData();
+        session.close();
+        return imageData;
     }
 }

@@ -1,5 +1,5 @@
 package edu.icet.ecom.util;
 
 public enum DaoType {
-    EMPLOYEE,ADMIN
+    EMPLOYEE,ADMIN,INVENTORY
 }

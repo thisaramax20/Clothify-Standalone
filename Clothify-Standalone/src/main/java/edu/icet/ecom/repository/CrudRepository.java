@@ -8,6 +8,7 @@ public interface CrudRepository<T> extends SuperDao{
     boolean save(T entity);
     boolean delete(Integer id);
     boolean update(T entity,Integer id);
-    List<Employee> getAll();
-    Employee getById(Integer id);
+    List<T> getAll();
+    T getById(Integer id);
+    byte[] getImageData(Integer id);
 }

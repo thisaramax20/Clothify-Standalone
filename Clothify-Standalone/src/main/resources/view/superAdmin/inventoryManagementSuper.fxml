@@ -11,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.ecom.controller.superAdmin.InventoryManagementSuperFormController">
    <left>
@@ -110,6 +111,12 @@
             <JFXComboBox fx:id="cmbSize" layoutX="212.0" layoutY="52.0" />
             <JFXComboBox fx:id="cmbCategory" layoutX="216.0" layoutY="171.0" />
             <JFXButton layoutX="212.0" layoutY="112.0" onAction="#btnSelectImageOnAction" text="Select Image" />
+            <Label layoutX="312.0" layoutY="31.0" text="ID">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="txtId" layoutX="312.0" layoutY="52.0" prefHeight="26.0" prefWidth="81.0" promptText="auto generated" />
          </children>
       </AnchorPane>
    </center>
