@@ -12,7 +12,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Employee {
-    private String NIC;
+    private Integer id;
+    private String nic;
     private String name;
     private String address;
     private LocalDate dob;
