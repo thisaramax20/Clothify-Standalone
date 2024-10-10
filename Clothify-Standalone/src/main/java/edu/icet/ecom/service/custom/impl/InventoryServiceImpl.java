@@ -63,4 +63,12 @@ public class InventoryServiceImpl implements InventoryService {
         ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
         return new Image(bis);
     }
+
+    @Override
+    public List<Integer> getAllIds() {
+        List<Inventory> all = getAll();
+        ArrayList<Integer> ids = new ArrayList<>();
+        all.forEach(inventory -> ids.add(inventory.getId()));
+        return ids;
+    }
 }

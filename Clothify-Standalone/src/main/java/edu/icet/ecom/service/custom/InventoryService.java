@@ -13,4 +13,5 @@ public interface InventoryService extends SuperService {
     List<Inventory> getAll();
     Inventory getById(Integer id);
     Image getImage(Integer id);
+    List<Integer> getAllIds();
 }

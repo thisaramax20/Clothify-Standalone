@@ -1,6 +1,5 @@
 package edu.icet.ecom.service;
 
-import edu.icet.ecom.repository.custom.impl.EmployeeDaoImpl;
 import edu.icet.ecom.service.custom.impl.*;
 import edu.icet.ecom.util.ServiceType;
 
@@ -19,6 +18,7 @@ public class ServiceFactory {
             case SUPPLIERITEM:return (T) new SupplierItemServiceImpl();
             case ADMIN:return (T) new AdminServiceImpl();
             case LOGIN:return (T) new LoginServiceImpl();
+            case ORDERDETAIL:return (T) new OrderDetailServiceImpl();
         }
         return null;
     }

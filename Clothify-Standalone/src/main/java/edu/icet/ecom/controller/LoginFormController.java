@@ -21,10 +21,12 @@ public class LoginFormController {
     LoginServiceImpl loginService = ServiceFactory.getInstance().getServiceType(ServiceType.LOGIN);
     String otp;
     boolean isOtp = false;
+    public static String username;
 
     public void btnLoginOnAction(ActionEvent actionEvent) {
         if (isOtp){
             if (txtPassword.getText().equals(otp)){
+                username = txtUsername.getText();
                 stage.close();
                 if (txtUsername.getText().startsWith("AD")){
                     try {
@@ -48,6 +50,7 @@ public class LoginFormController {
         }else {
             boolean executed = loginService.validateUser(txtUsername.getText(), txtPassword.getText());
             if (executed){
+                username = txtUsername.getText();
                 stage.close();
                 if (txtUsername.getText().startsWith("AD")){
                     try {
