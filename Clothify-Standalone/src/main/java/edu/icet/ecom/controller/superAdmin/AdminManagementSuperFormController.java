@@ -36,6 +36,7 @@ public class AdminManagementSuperFormController implements Initializable {
     public TableColumn colEmail;
     public JFXTextField txtId;
     public TableView<Admin> tblAdminDetals;
+    public JFXTextField txtTelephone;
     AdminServiceImpl adminService = ServiceFactory.getInstance().getServiceType(ServiceType.ADMIN);
 
     public void btnLoadHomePageOnAction(MouseEvent mouseEvent) {
@@ -64,6 +65,7 @@ public class AdminManagementSuperFormController implements Initializable {
                 txtName.getText(),
                 txtAddress.getText(),
                 txtDOB.getValue(),
+                txtTelephone.getText(),
                 txtPassword.getText(),
                 txtEmail.getText()
         ));
@@ -90,6 +92,7 @@ public class AdminManagementSuperFormController implements Initializable {
                 txtName.getText(),
                 txtAddress.getText(),
                 txtDOB.getValue(),
+                txtTelephone.getText(),
                 txtEmail.getText(),
                 txtPassword.getText()
         ),Integer.parseInt(txtId.getText()));
@@ -142,7 +145,7 @@ public class AdminManagementSuperFormController implements Initializable {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colNIC.setCellValueFactory(new PropertyValueFactory<>("nic"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        loadTable();
+        //loadTable();
         tblAdminDetals.getSelectionModel().selectedItemProperty().addListener((observableValue, previous, current) -> {
             if (current!=null) setSelectedValues(current);
         });

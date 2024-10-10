@@ -20,10 +20,12 @@ public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    private String username;
     private String nic;
     private String name;
     private String address;
     private LocalDate dob;
+    private String telephone;
     private String hashedPassword;
     private String email;
 }

@@ -18,6 +18,7 @@ public class ServiceFactory {
             case SUPPLIER:return (T) new SupplierServiceImpl();
             case SUPPLIERITEM:return (T) new SupplierItemServiceImpl();
             case ADMIN:return (T) new AdminServiceImpl();
+            case LOGIN:return (T) new LoginServiceImpl();
         }
         return null;
     }

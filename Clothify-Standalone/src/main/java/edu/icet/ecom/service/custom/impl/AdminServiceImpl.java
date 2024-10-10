@@ -2,7 +2,6 @@ package edu.icet.ecom.service.custom.impl;
 
 import edu.icet.ecom.dto.Admin;
 import edu.icet.ecom.repository.DaoFactory;
-import edu.icet.ecom.repository.SuperDao;
 import edu.icet.ecom.repository.custom.impl.AdminDaoImpl;
 import edu.icet.ecom.service.custom.AdminService;
 import edu.icet.ecom.util.DaoType;
@@ -19,6 +18,12 @@ public class AdminServiceImpl implements AdminService {
     public boolean save(Admin admin) {
         edu.icet.ecom.entity.Admin admin1 = new ModelMapper().map(admin, edu.icet.ecom.entity.Admin.class);
         admin1.setHashedPassword(EncryptPassword.hashingPassword(admin.getPassword()));
+        edu.icet.ecom.entity.Admin higestIdAdmin = adminDao.getHigestIdAdmin();
+        String username = higestIdAdmin.getUsername();
+        String num = username.substring(3);
+        int i = Integer.parseInt(num);
+        i++;
+        admin1.setUsername("AD-"+i);
         return adminDao.save(admin1);
     }
 

@@ -69,4 +69,22 @@ public class AdminDaoImpl implements AdminDao {
     public byte[] getImageData(Integer id) {
         return new byte[0];
     }
+
+    @Override
+    public Admin getHigestIdAdmin() {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        return session.createQuery("SELECT a FROM Admin a ORDER BY a.id DESC", Admin.class)
+                .setMaxResults(1)
+                .getSingleResult();
+    }
+
+    @Override
+    public Admin getByUsername(String username) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        return session.createQuery("SELECT a FROM Admin a WHERE a.username=:username",Admin.class)
+                .setParameter("username",username)
+                .getSingleResult();
+    }
 }
