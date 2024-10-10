@@ -3,8 +3,11 @@ package edu.icet.ecom.controller.superAdmin;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import edu.icet.ecom.dto.Supplier;
+import edu.icet.ecom.dto.SupplierItem;
+import edu.icet.ecom.entity.CompositePK_SupplierItem;
 import edu.icet.ecom.service.ServiceFactory;
 import edu.icet.ecom.service.SuperService;
+import edu.icet.ecom.service.custom.impl.SupplierItemServiceImpl;
 import edu.icet.ecom.service.custom.impl.SupplierServiceImpl;
 import edu.icet.ecom.util.ServiceType;
 import javafx.collections.FXCollections;
@@ -32,14 +35,16 @@ public class SupplierManagementSuperFormController implements Initializable {
     public TableColumn colCompany;
     public JFXTextField txtItemName;
     public JFXComboBox<Integer> cmbSupplierId;
-    public TableView tblItemSupplier;
+    public TableView<SupplierItem> tblItemSupplier;
     public TableColumn colSupplierID;
     public TableColumn colItemCode;
     public TableColumn colItemName;
     public TableColumn colItemCategory;
     public JFXComboBox<String> cmbItemCategory;
     public JFXTextField txtId;
+    public JFXTextField txtItemCode;
     SupplierServiceImpl supplierService = ServiceFactory.getInstance().getServiceType(ServiceType.SUPPLIER);
+    SupplierItemServiceImpl supplierItemService = ServiceFactory.getInstance().getServiceType(ServiceType.SUPPLIERITEM);
 
     public void btnLoadHomePageOnAction(MouseEvent mouseEvent) {
     }
@@ -63,23 +68,73 @@ public class SupplierManagementSuperFormController implements Initializable {
     }
 
     public void btnAddItemOnAction(ActionEvent actionEvent) {
-
+        boolean executed = supplierItemService.save(new SupplierItem(cmbSupplierId.getValue(), null,
+                txtItemName.getText(),
+                cmbItemCategory.getValue()
+        ));
+        if (executed){
+            new Alert(Alert.AlertType.INFORMATION,"Success").show();
+            loadTable2();
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Error").show();
+        }
     }
 
     public void btnDeleteItemOnAction(ActionEvent actionEvent) {
-
+        boolean executed = supplierItemService.delete(new CompositePK_SupplierItem(cmbSupplierId.getValue(),
+                Integer.parseInt(txtItemCode.getText())));
+        if (executed){
+            new Alert(Alert.AlertType.INFORMATION,"Success").show();
+            loadTable2();
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Error").show();
+        }
     }
 
     public void btnUpdateItemOnAction(ActionEvent actionEvent) {
-
+        boolean executed = supplierItemService.update(new SupplierItem(cmbSupplierId.getValue(),
+                Integer.parseInt(txtItemCode.getText()
+                ), txtItemName.getText(), cmbItemCategory.getValue()), new CompositePK_SupplierItem(cmbSupplierId.getValue(),
+                Integer.parseInt(txtItemCode.getText())));
+        if (executed){
+            new Alert(Alert.AlertType.INFORMATION,"Success").show();
+            loadTable2();
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Error").show();
+        }
     }
 
     public void btnSearchItemOnAction(ActionEvent actionEvent) {
-
+        supplierItemService.getById(new CompositePK_SupplierItem(cmbSupplierId.getValue(),
+                Integer.parseInt(txtItemCode.getText())
+        ));
     }
 
     public void btnClearFieldsOnAction(ActionEvent actionEvent) {
+        clearFields();
     }
+
+    private void clearFields(){
+        txtItemCode.setText("");
+        cmbItemCategory.setValue("");
+        txtItemName.setText("");
+        cmbSupplierId.setValue(0);
+    }
+
+    private void loadTable2(){
+        List<SupplierItem> all = supplierItemService.getAll();
+        ObservableList<SupplierItem> supplierItems = FXCollections.observableArrayList();
+        supplierItems.addAll(all);
+        tblItemSupplier.setItems(supplierItems);
+    }
+
+    private void setSelectedValues2(SupplierItem supplierItem){
+        cmbSupplierId.setValue(supplierItem.getSupplierId());
+        txtItemCode.setText(supplierItem.getItemCode().toString());
+        txtItemName.setText(supplierItem.getName());
+        cmbItemCategory.setValue(supplierItem.getCategory());
+    }
+
 
     public void btnAddSupplierOnAction(ActionEvent actionEvent) {
         boolean executed = supplierService.save(new Supplier(null, txtNIC.getText(),
@@ -162,6 +217,15 @@ public class SupplierManagementSuperFormController implements Initializable {
         setCmbItemCategory();
         tblSupplier.getSelectionModel().selectedItemProperty().addListener((observableValue, previous, current) -> {
             if (current!=null) setSelectedvalues(current);
+        });
+
+        colSupplierID.setCellValueFactory(new PropertyValueFactory<>("supplierId"));
+        colItemCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
+        colItemName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colItemCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
+        loadTable2();
+        tblItemSupplier.getSelectionModel().selectedItemProperty().addListener((observableValue, previous, current) -> {
+            if (current!=null) setSelectedValues2(current);
         });
     }
 }

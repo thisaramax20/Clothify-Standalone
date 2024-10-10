@@ -3,6 +3,7 @@ package edu.icet.ecom.service;
 import edu.icet.ecom.repository.custom.impl.EmployeeDaoImpl;
 import edu.icet.ecom.service.custom.impl.EmployeeServiceImpl;
 import edu.icet.ecom.service.custom.impl.InventoryServiceImpl;
+import edu.icet.ecom.service.custom.impl.SupplierItemServiceImpl;
 import edu.icet.ecom.service.custom.impl.SupplierServiceImpl;
 import edu.icet.ecom.util.ServiceType;
 
@@ -18,6 +19,7 @@ public class ServiceFactory {
             case EMPLOYEE:return (T) new EmployeeServiceImpl();
             case INVENTORY:return (T) new InventoryServiceImpl();
             case SUPPLIER:return (T) new SupplierServiceImpl();
+            case SUPPLIERITEM:return (T) new SupplierItemServiceImpl();
         }
         return null;
     }
