@@ -1,9 +1,6 @@
 package edu.icet.ecom.util;
 
-import edu.icet.ecom.entity.Employee;
-import edu.icet.ecom.entity.Inventory;
-import edu.icet.ecom.entity.Supplier;
-import edu.icet.ecom.entity.SupplierItem;
+import edu.icet.ecom.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
@@ -25,6 +22,7 @@ public class HibernateUtil {
                 .addAnnotatedClass(Inventory.class)
                 .addAnnotatedClass(Supplier.class)
                 .addAnnotatedClass(SupplierItem.class)
+                .addAnnotatedClass(Admin.class)
                 .getMetadataBuilder()
                 .applyImplicitNamingStrategy(ImplicitNamingStrategyJpaCompliantImpl.INSTANCE)
                 .build();
