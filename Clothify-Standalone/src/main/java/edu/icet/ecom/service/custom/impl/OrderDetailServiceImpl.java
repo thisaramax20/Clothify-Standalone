@@ -2,25 +2,35 @@ package edu.icet.ecom.service.custom.impl;
 
 import edu.icet.ecom.dto.Admin;
 import edu.icet.ecom.dto.Inventory;
-import edu.icet.ecom.dto.OrderDetails;
+import edu.icet.ecom.dto.Orders;
+import edu.icet.ecom.entity.OrderDetails;
 import edu.icet.ecom.repository.DaoFactory;
 import edu.icet.ecom.repository.SuperDao;
 import edu.icet.ecom.repository.custom.impl.AdminDaoImpl;
 import edu.icet.ecom.repository.custom.impl.InventoryDaoImpl;
+import edu.icet.ecom.repository.custom.impl.OrderDetailsDaoImpl;
 import edu.icet.ecom.service.ServiceFactory;
 import edu.icet.ecom.service.custom.OrderDetailsService;
 import edu.icet.ecom.util.DaoType;
 import edu.icet.ecom.util.ServiceType;
 import org.modelmapper.ModelMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDetailServiceImpl implements OrderDetailsService {
     InventoryServiceImpl serviceType = ServiceFactory.getInstance().getServiceType(ServiceType.INVENTORY);
+    OrderDetailsDaoImpl orderDetailsDao = DaoFactory.getInstance().getDaoType(DaoType.ORDERDETAILS);
 
     @Override
-    public boolean save(OrderDetails orderDetails) {
-        return false;
+    public boolean save(Orders orders) {
+        edu.icet.ecom.entity.Orders orders1 = new ModelMapper().map(orders, edu.icet.ecom.entity.Orders.class);
+        List<OrderDetails> orderDetails = new ArrayList<>();
+        orders1.getOrderDetails().forEach(orderDetails1 -> {
+            orderDetails.add(new ModelMapper().map(orderDetails1,OrderDetails.class));
+        });
+        orders1.setOrderDetails(orderDetails);
+        return orderDetailsDao.save(orders1);
     }
 
     @Override
@@ -29,17 +39,17 @@ public class OrderDetailServiceImpl implements OrderDetailsService {
     }
 
     @Override
-    public boolean update(OrderDetails orderDetails, Integer id) {
+    public boolean update(Orders orders, Integer id) {
         return false;
     }
 
     @Override
-    public List<OrderDetails> getAll() {
+    public List<Orders> getAll() {
         return List.of();
     }
 
     @Override
-    public OrderDetails getById(Integer id) {
+    public Orders getById(Integer id) {
         return null;
     }
 

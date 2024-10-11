@@ -40,7 +40,6 @@ public class OrderManagementSuperFormController implements Initializable {
     public TableColumn colDescription;
     public TableColumn colPrice;
     public TableColumn colQuantity;
-    public TableColumn colTotal;
     public JFXComboBox<Integer> cmbItemCode;
     public Label lblAdminID;
     public Label lblAdminName;
@@ -116,12 +115,19 @@ public class OrderManagementSuperFormController implements Initializable {
     }
 
     public void btnPayementCompleteOnAction(ActionEvent actionEvent) {
-        new Orders(null,txtCustomerEmail.getText(),
+        boolean executed = orderDetail.save(new Orders(null, txtCustomerEmail.getText(),
                 lblOrderID.getText(),
                 cmbTransactionType.getValue(),
                 total,
                 adminId,
-                adminName);
+                adminName,
+                orderDetailsOngoing)
+        );
+        if (executed){
+            new Alert(Alert.AlertType.INFORMATION,"Success").show();
+        }else{
+            new Alert(Alert.AlertType.ERROR,"Error").show();
+        }
     }
 
     private void setAdminDetails(){

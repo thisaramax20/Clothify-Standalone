@@ -1,13 +1,12 @@
 package edu.icet.ecom.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -24,4 +23,6 @@ public class Orders {
     private Double total;
     private Integer adminId;
     private String adminName;
+    @Transient
+    private List<OrderDetails> orderDetails;
 }
