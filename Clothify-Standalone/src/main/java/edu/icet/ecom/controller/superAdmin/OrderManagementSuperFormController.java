@@ -40,7 +40,7 @@ public class OrderManagementSuperFormController implements Initializable {
     public TableColumn colDescription;
     public TableColumn colPrice;
     public TableColumn colQuantity;
-    public JFXComboBox<Integer> cmbItemCode;
+    public JFXComboBox<String> cmbItemCode;
     public Label lblAdminID;
     public Label lblAdminName;
     public Label lblDate;
@@ -51,6 +51,7 @@ public class OrderManagementSuperFormController implements Initializable {
     public JFXTextField txtIQuantity;
     public Label lblOrderID;
     public JFXTextField txtIStockAvailble;
+    public JFXTextField txtOrderId;
     private String admin;
     OrderDetailServiceImpl orderDetail = ServiceFactory.getInstance().getServiceType(ServiceType.ORDERDETAIL);
     ObservableList<OrderDetails> orderDetailsOngoing = FXCollections.observableArrayList();
@@ -81,12 +82,24 @@ public class OrderManagementSuperFormController implements Initializable {
     }
 
     public void btnDeleteItemOnAction(ActionEvent actionEvent) {
+        String codeText = colItemCode.getText();
+        OrderDetails orderDetails;
+        for (OrderDetails details : orderDetailsOngoing){
+            if(details.getItemCode().equals(codeText)) {
+                orderDetails = details;
+                orderDetailsOngoing.remove(orderDetails);
+            }
+        }
     }
 
     public void btnUpdateItemOnAction(ActionEvent actionEvent) {
     }
 
-    public void btnSearchItemOnAction(ActionEvent actionEvent) {
+    public void btnSearchOrderOnAction(ActionEvent actionEvent) {
+        Orders byId = orderDetail.getById(txtOrderId.getText());
+        ObservableList<OrderDetails> orderDetails1 = FXCollections.observableArrayList();
+        byId.getOrderDetails().forEach(orderDetails -> orderDetails1.add(orderDetails));
+        tblOrders.setItems(orderDetails1);
     }
 
     public void btnClearFieldsOnAction(ActionEvent actionEvent) {
@@ -153,8 +166,8 @@ public class OrderManagementSuperFormController implements Initializable {
     }
 
     private void setItemCodes(){
-        List<Integer> allids = orderDetail.getAllids();
-        ObservableList<Integer> ids = FXCollections.observableArrayList();
+        List<String> allids = orderDetail.getAllids();
+        ObservableList<String> ids = FXCollections.observableArrayList();
         ids.addAll(allids);
         cmbItemCode.setItems(ids);
     }
@@ -166,12 +179,16 @@ public class OrderManagementSuperFormController implements Initializable {
         cmbTransactionType.setItems(types);
     }
 
-    private void setItemDetails(Integer id){
-        Inventory inventory = orderDetail.getByIdItem(id);
+    private void setItemDetails(String itemCode){
+        Inventory inventory = orderDetail.getByIdItem(itemCode);
         stock = inventory.getQuantity();
         txtIStockAvailble.setText(stock.toString());
         txtPrice.setText(inventory.getPrice().toString());
         txtItemDescription.setText(inventory.getName());
+    }
+
+    private void setOrderId(){
+        lblOrderID.setText(orderDetail.getOrderId());
     }
 
     @Override
@@ -181,6 +198,7 @@ public class OrderManagementSuperFormController implements Initializable {
         loadDateAndTime();
         setItemCodes();
         setTransactionType();
+        setOrderId();
         cmbItemCode.getSelectionModel().selectedItemProperty().addListener((observableValue, previous, current) -> {
             if (current!=null) setItemDetails(current);
         });
@@ -188,5 +206,9 @@ public class OrderManagementSuperFormController implements Initializable {
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         colItemCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
+    }
+
+    public void btnCancelOrderOnAction(ActionEvent actionEvent) {
+        orderDetail.delete(txtOrderId.getText());
     }
 }

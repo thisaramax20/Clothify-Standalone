@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Supplier {
     private Integer id;
+    private String supplierCode;
     private String nic;
     private String name;
     private String company;

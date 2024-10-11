@@ -7,11 +7,12 @@ import java.util.List;
 
 public interface OrderDetailsService extends SuperService {
     boolean save(Orders orders);
-    boolean delete(Integer id);
+    boolean delete(String id);
     boolean update(Orders orders,Integer id);
     List<Orders> getAll();
-    Orders getById(Integer id);
+    Orders getById(String id);
     Admin getAdmin(String username);
-    List<Integer> getAllids();
-    Inventory getByIdItem(Integer id);
+    List<String> getAllids();
+    Inventory getByIdItem(String itemCode);
+    String getOrderId();
 }

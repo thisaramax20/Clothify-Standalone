@@ -66,6 +66,7 @@ public class InventoryManagementSuperFormController implements Initializable {
 
     public void btnAddItemOnAction(ActionEvent actionEvent) {
         boolean executed = service.save(new Inventory(null,
+                null,
                 txtName.getText(),
                 cmbSize.getValue(),
                 Double.parseDouble(txtPrice.getText()),
@@ -75,15 +76,17 @@ public class InventoryManagementSuperFormController implements Initializable {
         );
         if (executed){
             new Alert(Alert.AlertType.INFORMATION,"Successful").show();
+            loadTable();
         }else {
             new Alert(Alert.AlertType.ERROR,"Error").show();
         }
     }
 
     public void btnDeleteItemOnAction(ActionEvent actionEvent) {
-        boolean executed = service.delete(Integer.parseInt(txtId.getText()));
+        boolean executed = service.delete(txtId.getText());
         if (executed){
             new Alert(Alert.AlertType.INFORMATION,"Successful").show();
+            loadTable();
         }else {
             new Alert(Alert.AlertType.ERROR,"Error").show();
         }
@@ -91,22 +94,24 @@ public class InventoryManagementSuperFormController implements Initializable {
 
     public void btnUpdateItemOnAction(ActionEvent actionEvent) {
         boolean executed = service.update(new Inventory(null,
+                txtId.getText(),
                 txtName.getText(),
                 cmbSize.getValue(),
                 Double.parseDouble(txtPrice.getText()),
                 cmbCategory.getValue(),
                 Integer.parseInt(txtQuantity.getText()),
                 imageFilePath)
-        ,Integer.parseInt(txtId.getText()));
+        );
         if (executed){
             new Alert(Alert.AlertType.INFORMATION,"Successful").show();
+            loadTable();
         }else {
             new Alert(Alert.AlertType.ERROR,"Error").show();
         }
     }
 
     public void btnSearchItemOnAction(ActionEvent actionEvent) {
-        service.getById(Integer.parseInt(txtId.getText()));
+        service.getById(txtId.getText());
     }
 
     public void btnClearFieldsOnAction(ActionEvent actionEvent) {
@@ -132,7 +137,7 @@ public class InventoryManagementSuperFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setSizeValuesToCombo();
         setCategoryValuesToCombo();
-        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colID.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -152,13 +157,13 @@ public class InventoryManagementSuperFormController implements Initializable {
     }
 
     private void setSelectedValues(Inventory inventory){
-        txtId.setText(inventory.getId().toString());
+        txtId.setText(inventory.getItemCode());
         txtQuantity.setText(inventory.getQuantity().toString());
         txtPrice.setText(inventory.getPrice().toString());
         txtName.setText(inventory.getName());
         cmbCategory.setValue(inventory.getCategory());
         cmbSize.setValue(inventory.getSize());
-        Image image = service.getImage(inventory.getId());
+        Image image = service.getImage(inventory.getItemCode());
         imageView.setImage(image);
     }
 

@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface SupplierService extends SuperService {
     boolean save(Supplier supplier);
-    boolean delete(Integer id);
-    boolean update(Supplier supplier,Integer id);
+    boolean delete(String supplierCode);
+    boolean update(Supplier supplier);
     List<Supplier> getAll();
-    Supplier getById(Integer id);
+    Supplier getById(String supplierCode);
     List<Integer> getAllIds();
 }

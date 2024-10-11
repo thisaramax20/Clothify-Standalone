@@ -1,6 +1,6 @@
 package edu.icet.ecom.repository.custom.impl;
 
-import edu.icet.ecom.entity.Employee;
+import edu.icet.ecom.entity.Admin;
 import edu.icet.ecom.entity.Inventory;
 import edu.icet.ecom.repository.custom.InventoryDao;
 import edu.icet.ecom.util.HibernateUtil;
@@ -20,7 +20,7 @@ public class InventoryDaoImpl implements InventoryDao {
     }
 
     @Override
-    public boolean delete(Integer id) {
+    public boolean delete(String id) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
         Inventory inventory = session.get(Inventory.class, id);
@@ -31,10 +31,10 @@ public class InventoryDaoImpl implements InventoryDao {
     }
 
     @Override
-    public boolean update(Inventory entity, Integer id) {
+    public boolean update(Inventory entity) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Inventory inventory = session.get(Inventory.class, id);
+        Inventory inventory = getById(entity.getItemCode());
         inventory.setCategory(entity.getCategory());
         inventory.setName(entity.getName());
         inventory.setQuantity(entity.getQuantity());
@@ -56,19 +56,37 @@ public class InventoryDaoImpl implements InventoryDao {
     }
 
     @Override
-    public Inventory getById(Integer id) {
+    public Inventory getById(String id) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Inventory inventory = session.find(Inventory.class, id);
+        Inventory inventory = session.createQuery("SELECT a FROM Inventory a WHERE a.itemCode=:itemCode", Inventory.class)
+                .setParameter("itemCode", id)
+                .getSingleResult();
         session.close();
         return inventory;
     }
 
     @Override
-    public byte[] getImageData(Integer id) {
+    public Inventory getHigestId() {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Inventory inventory = session.find(Inventory.class, id);
+        try {
+            return session.createQuery("SELECT a FROM Inventory a ORDER BY a.id DESC", Inventory.class)
+                    .setMaxResults(1)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }finally {
+            session.close();
+        }
+
+    }
+
+    @Override
+    public byte[] getImageData(String itemCode) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Inventory inventory = getById(itemCode);
         byte[] imageData = inventory.getImageData();
         session.close();
         return imageData;

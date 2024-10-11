@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface EmployeeService extends SuperService {
     boolean save(Employee employee);
-    boolean delete(Integer id);
-    boolean update(Employee employee,Integer id);
+    boolean delete(String username);
+    boolean update(Employee employee);
     List<Employee> getAll();
-    Employee getById(Integer id);
+    Employee getById(String username);
 }

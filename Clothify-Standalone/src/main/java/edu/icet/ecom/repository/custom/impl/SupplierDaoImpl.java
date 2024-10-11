@@ -20,10 +20,10 @@ public class SupplierDaoImpl implements SupplierDao {
     }
 
     @Override
-    public boolean delete(Integer id) {
+    public boolean delete(String id) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Supplier supplier = session.get(Supplier.class, id);
+        Supplier supplier = getById(id);
         session.remove(supplier);
         session.getTransaction().commit();
         session.close();
@@ -31,10 +31,10 @@ public class SupplierDaoImpl implements SupplierDao {
     }
 
     @Override
-    public boolean update(Supplier entity, Integer id) {
+    public boolean update(Supplier entity) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Supplier supplier = session.get(Supplier.class, id);
+        Supplier supplier = getById(entity.getSupplierCode());
         supplier.setNic(entity.getNic());
         supplier.setName(entity.getName());
         supplier.setCompany(entity.getCompany());
@@ -54,7 +54,7 @@ public class SupplierDaoImpl implements SupplierDao {
     }
 
     @Override
-    public Supplier getById(Integer id) {
+    public Supplier getById(String id) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
         Supplier supplier = session.find(Supplier.class, id);
@@ -63,7 +63,18 @@ public class SupplierDaoImpl implements SupplierDao {
     }
 
     @Override
-    public byte[] getImageData(Integer id) {
-        return null;
+    public Supplier getHigestId() {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        try {
+            return session.createQuery("SELECT a FROM Supplier a ORDER BY a.id DESC", Supplier.class)
+                    .setMaxResults(1)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }finally {
+            session.close();
+        }
     }
+
 }

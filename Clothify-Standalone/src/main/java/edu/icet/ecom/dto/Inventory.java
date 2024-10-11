@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Inventory {
     private Integer id;
+    private String itemCode;
     private String name;
     private String size;
     private Double price;

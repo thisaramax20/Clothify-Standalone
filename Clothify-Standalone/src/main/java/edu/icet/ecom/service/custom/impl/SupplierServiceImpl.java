@@ -2,7 +2,6 @@ package edu.icet.ecom.service.custom.impl;
 
 import edu.icet.ecom.dto.Supplier;
 import edu.icet.ecom.repository.DaoFactory;
-import edu.icet.ecom.repository.SuperDao;
 import edu.icet.ecom.repository.custom.impl.SupplierDaoImpl;
 import edu.icet.ecom.service.custom.SupplierService;
 import edu.icet.ecom.util.DaoType;
@@ -16,17 +15,25 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public boolean save(Supplier supplier) {
-        return supplierDao.save(new ModelMapper().map(supplier,edu.icet.ecom.entity.Supplier.class));
+        edu.icet.ecom.entity.Supplier supplier1 = new ModelMapper().map(supplier, edu.icet.ecom.entity.Supplier.class);
+        edu.icet.ecom.entity.Supplier higestId = supplierDao.getHigestId();
+        if (higestId==null){
+            supplier1.setSupplierCode("SP-1");
+        }else{
+            int currentId = Integer.parseInt(higestId.getSupplierCode());
+            supplier1.setSupplierCode("SP-"+ ++currentId);
+        }
+        return supplierDao.save(supplier1);
     }
 
     @Override
-    public boolean delete(Integer id) {
-        return supplierDao.delete(id);
+    public boolean delete(String supplierCode) {
+        return supplierDao.delete(supplierCode);
     }
 
     @Override
-    public boolean update(Supplier supplier, Integer id) {
-        return supplierDao.update(new ModelMapper().map(supplier,edu.icet.ecom.entity.Supplier.class),id);
+    public boolean update(Supplier supplier) {
+        return supplierDao.update(new ModelMapper().map(supplier,edu.icet.ecom.entity.Supplier.class));
     }
 
     @Override
@@ -38,8 +45,8 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public Supplier getById(Integer id) {
-        return new ModelMapper().map(supplierDao.getById(id), Supplier.class);
+    public Supplier getById(String supplierCode) {
+        return new ModelMapper().map(supplierDao.getById(supplierCode), Supplier.class);
     }
 
     @Override

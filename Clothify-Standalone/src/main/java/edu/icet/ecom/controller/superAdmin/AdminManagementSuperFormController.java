@@ -3,7 +3,6 @@ package edu.icet.ecom.controller.superAdmin;
 import com.jfoenix.controls.JFXTextField;
 import edu.icet.ecom.dto.Admin;
 import edu.icet.ecom.service.ServiceFactory;
-import edu.icet.ecom.service.SuperService;
 import edu.icet.ecom.service.custom.impl.AdminServiceImpl;
 import edu.icet.ecom.util.ServiceType;
 import javafx.collections.FXCollections;
@@ -62,6 +61,7 @@ public class AdminManagementSuperFormController implements Initializable {
 
     public void btnAddAdminOnAction(ActionEvent actionEvent) {
         boolean executed = adminService.save(new Admin(null, txtNIC.getText(),
+                txtId.getText(),
                 txtName.getText(),
                 txtAddress.getText(),
                 txtDOB.getValue(),
@@ -78,7 +78,7 @@ public class AdminManagementSuperFormController implements Initializable {
     }
 
     public void btnDeleteAdminOnAction(ActionEvent actionEvent) {
-        boolean executed = adminService.delete(Integer.parseInt(txtId.getText()));
+        boolean executed = adminService.delete(txtId.getText());
         if (executed){
             new Alert(Alert.AlertType.INFORMATION,"Success").show();
             loadTable();
@@ -89,13 +89,14 @@ public class AdminManagementSuperFormController implements Initializable {
 
     public void btnUpdateAdminOnAction(ActionEvent actionEvent) {
         boolean executed = adminService.update(new Admin(null, txtNIC.getText(),
+                txtId.getText(),
                 txtName.getText(),
                 txtAddress.getText(),
                 txtDOB.getValue(),
                 txtTelephone.getText(),
                 txtEmail.getText(),
                 txtPassword.getText()
-        ),Integer.parseInt(txtId.getText()));
+        ));
         if (executed){
             new Alert(Alert.AlertType.INFORMATION,"Success").show();
             loadTable();
@@ -105,7 +106,7 @@ public class AdminManagementSuperFormController implements Initializable {
     }
 
     public void btnSearchAdminOnAction(ActionEvent actionEvent) {
-        adminService.getById(Integer.parseInt(txtId.getText()));
+        adminService.getById((txtId.getText()));
     }
 
     public void btnClearFieldsOnAction(ActionEvent actionEvent) {
@@ -141,7 +142,7 @@ public class AdminManagementSuperFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         colDOB.setCellValueFactory(new PropertyValueFactory<>("dob"));
-        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colID.setCellValueFactory(new PropertyValueFactory<>("username"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colNIC.setCellValueFactory(new PropertyValueFactory<>("nic"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));

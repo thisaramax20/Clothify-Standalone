@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Admin {
     private Integer id;
+    private String username;
     private String nic;
     private String name;
     private String address;

@@ -106,7 +106,7 @@
             <JFXButton layoutX="181.0" layoutY="435.0" onAction="#btnUpdateAdminOnAction" prefHeight="26.0" prefWidth="69.0" text="Update" />
             <JFXButton layoutX="259.0" layoutY="435.0" onAction="#btnSearchAdminOnAction" prefHeight="26.0" prefWidth="69.0" text="Search" />
             <JFXButton layoutX="335.0" layoutY="435.0" onAction="#btnClearFieldsOnAction" prefHeight="26.0" prefWidth="69.0" text="Clear" />
-            <Label layoutX="370.0" layoutY="12.0" text="ID">
+            <Label layoutX="370.0" layoutY="12.0" text="Username">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>

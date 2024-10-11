@@ -8,10 +8,10 @@ import java.util.List;
 
 public interface InventoryService extends SuperService {
     boolean save(Inventory inventory);
-    boolean delete(Integer id);
-    boolean update(Inventory inventory,Integer id);
+    boolean delete(String itemCode);
+    boolean update(Inventory inventory);
     List<Inventory> getAll();
-    Inventory getById(Integer id);
-    Image getImage(Integer id);
-    List<Integer> getAllIds();
+    Inventory getById(String itemCode);
+    Image getImage(String itemCode);
+    List<String> getAllIds();
 }

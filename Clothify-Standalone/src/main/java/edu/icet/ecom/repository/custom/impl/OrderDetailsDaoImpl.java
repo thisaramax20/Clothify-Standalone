@@ -3,6 +3,7 @@ package edu.icet.ecom.repository.custom.impl;
 import edu.icet.ecom.entity.Inventory;
 import edu.icet.ecom.entity.OrderDetails;
 import edu.icet.ecom.entity.Orders;
+import edu.icet.ecom.entity.Supplier;
 import edu.icet.ecom.repository.custom.OrderDetailsDao;
 import edu.icet.ecom.util.HibernateUtil;
 import org.hibernate.Session;
@@ -44,27 +45,53 @@ public class OrderDetailsDaoImpl implements OrderDetailsDao {
     }
 
     @Override
-    public boolean delete(Integer id) {
-        return false;
+    public boolean delete(String id) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Orders byId = getById(id);
+        session.remove(byId);
+        session.close();
+        return true;
     }
 
     @Override
-    public boolean update(Orders entity, Integer id) {
+    public boolean update(Orders entity) {
         return false;
     }
 
     @Override
     public List<Orders> getAll() {
-        return List.of();
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        List<Orders> resultList = session.createQuery("SELECT a FROM Orders a", Orders.class).getResultList();
+        session.close();
+        return resultList;
     }
 
     @Override
-    public Orders getById(Integer id) {
-        return null;
+    public Orders getById(String id) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Orders orders = session.createQuery("SELECT a FROM Orders a WHERE a.orderId=:orderId", Orders.class)
+                .setParameter("orderId", id)
+                .getSingleResult();
+        session.close();
+        return orders;
     }
 
     @Override
-    public byte[] getImageData(Integer id) {
-        return new byte[0];
+    public Orders getHigestId() {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        try {
+            return session.createQuery("SELECT a FROM Orders a ORDER BY a.id DESC", Orders.class)
+                    .setMaxResults(1)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }finally {
+            session.close();
+        }
     }
+
 }

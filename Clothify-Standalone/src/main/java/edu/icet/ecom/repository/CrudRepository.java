@@ -1,14 +1,12 @@
 package edu.icet.ecom.repository;
 
-import edu.icet.ecom.entity.Employee;
-
 import java.util.List;
 
 public interface CrudRepository<T> extends SuperDao{
     boolean save(T entity);
-    boolean delete(Integer id);
-    boolean update(T entity,Integer id);
+    boolean delete(String id);
+    boolean update(T entity);
     List<T> getAll();
-    T getById(Integer id);
-    byte[] getImageData(Integer id);
+    T getById(String id);
+    T getHigestId();
 }

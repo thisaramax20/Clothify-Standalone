@@ -18,25 +18,29 @@ public class AdminServiceImpl implements AdminService {
     public boolean save(Admin admin) {
         edu.icet.ecom.entity.Admin admin1 = new ModelMapper().map(admin, edu.icet.ecom.entity.Admin.class);
         admin1.setHashedPassword(EncryptPassword.hashingPassword(admin.getPassword()));
-        edu.icet.ecom.entity.Admin higestIdAdmin = adminDao.getHigestIdAdmin();
-        String username = higestIdAdmin.getUsername();
-        String num = username.substring(3);
-        int i = Integer.parseInt(num);
-        i++;
-        admin1.setUsername("AD-"+i);
+        edu.icet.ecom.entity.Admin higestIdAdmin = adminDao.getHigestId();
+        String username = "";
+        if (higestIdAdmin==null){
+            admin1.setUsername("AD-1");
+        }else{
+            String num = username.substring(3);
+            int i = Integer.parseInt(num);
+            i++;
+            admin1.setUsername("AD-"+i);
+        }
         return adminDao.save(admin1);
     }
 
     @Override
-    public boolean delete(Integer id) {
-        return adminDao.delete(id);
+    public boolean delete(String username) {
+        return adminDao.delete(username);
     }
 
     @Override
-    public boolean update(Admin admin, Integer id) {
+    public boolean update(Admin admin) {
         edu.icet.ecom.entity.Admin admin1 = new ModelMapper().map(admin, edu.icet.ecom.entity.Admin.class);
         admin1.setHashedPassword(EncryptPassword.hashingPassword(admin.getPassword()));
-        return adminDao.update(admin1,id);
+        return adminDao.update(admin1);
     }
 
     @Override
@@ -48,7 +52,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Admin getById(Integer id) {
-        return new ModelMapper().map(adminDao.getById(id),Admin.class);
+    public Admin getById(String username) {
+        return new ModelMapper().map(adminDao.getById(username),Admin.class);
     }
 }

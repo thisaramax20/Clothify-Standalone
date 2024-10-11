@@ -1,7 +1,6 @@
 package edu.icet.ecom.repository.custom.impl;
 
 import edu.icet.ecom.entity.Admin;
-import edu.icet.ecom.entity.Employee;
 import edu.icet.ecom.repository.custom.AdminDao;
 import edu.icet.ecom.util.HibernateUtil;
 import org.hibernate.Session;
@@ -20,10 +19,10 @@ public class AdminDaoImpl implements AdminDao {
     }
 
     @Override
-    public boolean delete(Integer id) {
+    public boolean delete(String id) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Admin admin = session.get(Admin.class, id);
+        Admin admin = getById(id);
         session.remove(admin);
         session.getTransaction().commit();
         session.close();
@@ -31,10 +30,10 @@ public class AdminDaoImpl implements AdminDao {
     }
 
     @Override
-    public boolean update(Admin entity, Integer id) {
+    public boolean update(Admin entity) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Admin admin = session.get(Admin.class, id);
+        Admin admin = getById(entity.getUsername());
         admin.setNic(entity.getNic());
         admin.setName(entity.getName());
         admin.setAddress(entity.getAddress());
@@ -57,34 +56,28 @@ public class AdminDaoImpl implements AdminDao {
     }
 
     @Override
-    public Admin getById(Integer id) {
+    public Admin getById(String id) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Admin admin = session.find(Admin.class, id);
+        Admin admin = session.createQuery("SELECT a FROM Admin a WHERE a.username=:username", Admin.class)
+                .setParameter("username", id)
+                .getSingleResult();
         session.close();
         return admin;
     }
 
     @Override
-    public byte[] getImageData(Integer id) {
-        return new byte[0];
-    }
-
-    @Override
-    public Admin getHigestIdAdmin() {
+    public Admin getHigestId() {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        return session.createQuery("SELECT a FROM Admin a ORDER BY a.id DESC", Admin.class)
-                .setMaxResults(1)
-                .getSingleResult();
-    }
-
-    @Override
-    public Admin getByUsername(String username) {
-        Session session = HibernateUtil.getSession();
-        session.getTransaction().begin();
-        return session.createQuery("SELECT a FROM Admin a WHERE a.username=:username",Admin.class)
-                .setParameter("username",username)
-                .getSingleResult();
+        Admin admin;
+        try {
+            admin = session.createQuery("SELECT a FROM Admin a ORDER BY a.id DESC", Admin.class)
+                    .setMaxResults(1)
+                    .getSingleResult();
+            return admin;
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

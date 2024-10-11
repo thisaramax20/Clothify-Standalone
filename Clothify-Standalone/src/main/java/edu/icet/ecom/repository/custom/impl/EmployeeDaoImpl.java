@@ -1,5 +1,6 @@
 package edu.icet.ecom.repository.custom.impl;
 
+import edu.icet.ecom.entity.Admin;
 import edu.icet.ecom.entity.Employee;
 import edu.icet.ecom.repository.custom.EmployeeDao;
 import edu.icet.ecom.util.HibernateUtil;
@@ -19,7 +20,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public boolean delete(Integer id) {
+    public boolean delete(String id) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
         Employee employee = session.get(Employee.class, id);
@@ -30,10 +31,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public boolean update(Employee entity,Integer id) {
+    public boolean update(Employee entity) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Employee employee = session.get(Employee.class, id);
+        Employee employee = getById(entity.getUsername());
         employee.setNic(entity.getNic());
         employee.setName(entity.getName());
         employee.setAddress(entity.getAddress());
@@ -55,16 +56,30 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public Employee getById(Integer id) {
+    public Employee getById(String id) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Employee employee = session.find(Employee.class, id);
+        Employee employee = session.createQuery("SELECT a FROM Employee a WHERE a.username=:username", Employee.class)
+                .setParameter("username", id)
+                .getSingleResult();
         session.close();
         return employee;
     }
 
     @Override
-    public byte[] getImageData(Integer id) {
-        return null;
+    public Employee getHigestId() {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        try {
+            return session.createQuery("SELECT a FROM Employee a ORDER BY a.id DESC", Employee.class)
+                    .setMaxResults(1)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }finally {
+            session.close();
+        }
+
     }
+
 }

@@ -15,6 +15,7 @@ public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    private String itemCode;
     private String name;
     private String size;
     private Double price;

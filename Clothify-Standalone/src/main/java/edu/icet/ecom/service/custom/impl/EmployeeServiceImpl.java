@@ -2,7 +2,6 @@ package edu.icet.ecom.service.custom.impl;
 
 import edu.icet.ecom.dto.Employee;
 import edu.icet.ecom.repository.DaoFactory;
-import edu.icet.ecom.repository.SuperDao;
 import edu.icet.ecom.repository.custom.impl.EmployeeDaoImpl;
 import edu.icet.ecom.service.custom.EmployeeService;
 import edu.icet.ecom.util.DaoType;
@@ -15,17 +14,25 @@ public class EmployeeServiceImpl implements EmployeeService {
     EmployeeDaoImpl employeeDao = DaoFactory.getInstance().getDaoType(DaoType.EMPLOYEE);
     @Override
     public boolean save(Employee employee) {
-        return employeeDao.save(new ModelMapper().map(employee, edu.icet.ecom.entity.Employee.class));
+        edu.icet.ecom.entity.Employee employee1 = new ModelMapper().map(employee, edu.icet.ecom.entity.Employee.class);
+        edu.icet.ecom.entity.Employee employeeDaoById = employeeDao.getHigestId();
+        if (employeeDaoById==null){
+            employee1.setUsername("EM-1");
+        }else{
+            int currentId = Integer.parseInt(employeeDaoById.getUsername().substring(3));
+            employee1.setUsername("EM-"+ ++currentId);
+        }
+        return employeeDao.save(employee1);
     }
 
     @Override
-    public boolean delete(Integer id) {
-        return employeeDao.delete(id);
+    public boolean delete(String username) {
+        return employeeDao.delete(username);
     }
 
     @Override
-    public boolean update(Employee employee, Integer id) {
-        return employeeDao.update(new ModelMapper().map(employee, edu.icet.ecom.entity.Employee.class),id);
+    public boolean update(Employee employee) {
+        return employeeDao.update(new ModelMapper().map(employee, edu.icet.ecom.entity.Employee.class));
     }
 
     @Override
@@ -37,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee getById(Integer id) {
-        return new ModelMapper().map(employeeDao.getById(id),Employee.class);
+    public Employee getById(String username) {
+        return new ModelMapper().map(employeeDao.getById(username),Employee.class);
     }
 }

@@ -18,6 +18,7 @@ public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    private String supplierCode;
     private String nic;
     private String name;
     private String company;

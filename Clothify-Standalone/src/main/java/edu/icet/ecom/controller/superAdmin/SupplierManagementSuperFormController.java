@@ -137,7 +137,7 @@ public class SupplierManagementSuperFormController implements Initializable {
 
 
     public void btnAddSupplierOnAction(ActionEvent actionEvent) {
-        boolean executed = supplierService.save(new Supplier(null, txtNIC.getText(),
+        boolean executed = supplierService.save(new Supplier(null, txtNIC.getText(),null,
                 txtName.getText(),
                 txtCompany.getText()
         ));
@@ -151,7 +151,7 @@ public class SupplierManagementSuperFormController implements Initializable {
     }
 
     public void btnDeleteSupplierOnAction(ActionEvent actionEvent) {
-        boolean executed = supplierService.delete(Integer.parseInt(txtId.getText()));
+        boolean executed = supplierService.delete(txtId.getText());
         if (executed){
             new Alert(Alert.AlertType.INFORMATION,"Success").show();
             loadTable();
@@ -161,10 +161,11 @@ public class SupplierManagementSuperFormController implements Initializable {
     }
 
     public void btnUpdateSupplierOnAction(ActionEvent actionEvent) {
-        boolean executed = supplierService.update(new Supplier(null, txtNIC.getText(),
+        boolean executed = supplierService.update(new Supplier(null,txtId.getText(),
+                txtNIC.getText(),
                 txtName.getText(),
                 txtCompany.getText()
-        ),Integer.parseInt(txtId.getText()));
+        ));
         if (executed){
             new Alert(Alert.AlertType.INFORMATION,"Success");
             loadTable();
@@ -174,7 +175,7 @@ public class SupplierManagementSuperFormController implements Initializable {
     }
 
     public void btnSearchSupplierOnAction(ActionEvent actionEvent) {
-        setSelectedvalues(supplierService.getById(Integer.parseInt(txtId.getText())));
+        setSelectedvalues(supplierService.getById(txtId.getText()));
     }
 
     private void loadTable(){

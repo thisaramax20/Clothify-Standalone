@@ -31,17 +31,24 @@ public class InventoryServiceImpl implements InventoryService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        edu.icet.ecom.entity.Inventory higestId = inventoryDao.getHigestId();
+        if (higestId==null){
+            inventoryEntity.setItemCode("IN-1");
+        }else {
+            int currentId = Integer.parseInt(higestId.getItemCode().substring(3));
+            inventoryEntity.setItemCode("IN-"+ ++currentId);
+        }
         return inventoryDao.save(inventoryEntity);
     }
 
     @Override
-    public boolean delete(Integer id) {
-        return inventoryDao.delete(id);
+    public boolean delete(String itemCode) {
+        return inventoryDao.delete(itemCode);
     }
 
     @Override
-    public boolean update(Inventory inventory, Integer id) {
-        return inventoryDao.update(new ModelMapper().map(inventory,edu.icet.ecom.entity.Inventory.class),id);
+    public boolean update(Inventory inventory) {
+        return inventoryDao.update(new ModelMapper().map(inventory,edu.icet.ecom.entity.Inventory.class));
     }
 
     @Override
@@ -53,22 +60,22 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public Inventory getById(Integer id) {
-        return new ModelMapper().map(inventoryDao.getById(id), Inventory.class);
+    public Inventory getById(String itemCode) {
+        return new ModelMapper().map(inventoryDao.getById(itemCode), Inventory.class);
     }
 
     @Override
-    public Image getImage(Integer id) {
-        byte[] imageData = inventoryDao.getImageData(id);
+    public Image getImage(String itemCode) {
+        byte[] imageData = inventoryDao.getImageData(itemCode);
         ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
         return new Image(bis);
     }
 
     @Override
-    public List<Integer> getAllIds() {
+    public List<String> getAllIds() {
         List<Inventory> all = getAll();
-        ArrayList<Integer> ids = new ArrayList<>();
-        all.forEach(inventory -> ids.add(inventory.getId()));
+        ArrayList<String > ids = new ArrayList<>();
+        all.forEach(inventory -> ids.add(inventory.getItemCode()));
         return ids;
     }
 }

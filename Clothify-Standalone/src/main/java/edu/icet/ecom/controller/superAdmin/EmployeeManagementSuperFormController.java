@@ -3,7 +3,6 @@ package edu.icet.ecom.controller.superAdmin;
 import com.jfoenix.controls.JFXTextField;
 import edu.icet.ecom.dto.Employee;
 import edu.icet.ecom.service.ServiceFactory;
-import edu.icet.ecom.service.SuperService;
 import edu.icet.ecom.service.custom.impl.EmployeeServiceImpl;
 import edu.icet.ecom.util.ServiceType;
 import javafx.collections.FXCollections;
@@ -60,6 +59,7 @@ public class EmployeeManagementSuperFormController implements Initializable {
 
     public void btnAddEmployeeOnAction(ActionEvent actionEvent) {
         boolean executed = employeeService.save(new Employee(null,txtNIC.getText(),
+                null,
                 txtName.getText(),
                 txtAddress.getText(),
                 txtDOB.getValue(),
@@ -74,7 +74,7 @@ public class EmployeeManagementSuperFormController implements Initializable {
     }
 
     public void btnDeleteEmployeeOnAction(ActionEvent actionEvent) {
-        boolean executed = employeeService.delete(Integer.parseInt(txtId.getText()));
+        boolean executed = employeeService.delete(txtId.getText());
         if (executed) {
             new Alert(Alert.AlertType.INFORMATION,"Successfully deleted.🆗").show();
             loadTable();
@@ -85,11 +85,12 @@ public class EmployeeManagementSuperFormController implements Initializable {
 
     public void btnUpdateEmployeeOnAction(ActionEvent actionEvent) {
         boolean executed = employeeService.update(new Employee(null,txtNIC.getText(),
+                txtId.getText(),
                 txtName.getText(),
                 txtAddress.getText(),
                 txtDOB.getValue(),
                 txtEmail.getText()
-        ),Integer.parseInt(txtId.getText()));
+        ));
         if (executed) {
             new Alert(Alert.AlertType.INFORMATION,"Successfully updated.🆗").show();
             loadTable();
@@ -99,7 +100,7 @@ public class EmployeeManagementSuperFormController implements Initializable {
     }
 
     public void btnSearchEmployeeOnAction(ActionEvent actionEvent) {
-        Employee employee = employeeService.getById(Integer.parseInt(txtId.getText()));
+        Employee employee = employeeService.getById(txtId.getText());
         if (employee!=null) {
             setSelectedFields(employee);
         }else {

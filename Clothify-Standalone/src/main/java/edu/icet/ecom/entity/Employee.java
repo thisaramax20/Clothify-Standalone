@@ -20,6 +20,7 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    private String username;
     private String nic;
     private String name;
     private String address;

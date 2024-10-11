@@ -15,14 +15,14 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public boolean validateUser(String username, String password) {
-        Admin admin = adminDao.getByUsername(username);
+        Admin admin = adminDao.getById(username);
         String hashedPassword = admin.getHashedPassword();
         return EncryptPassword.checkPassword(password,hashedPassword);
     }
 
     @Override
     public String sendEmail(String username) {
-        Admin admin = adminDao.getByUsername(username);
+        Admin admin = adminDao.getById(username);
         String otp = OtpGenerator.generateOtp(6);
         EmailSending.sendEmail(admin.getEmail(), otp);
         return otp;

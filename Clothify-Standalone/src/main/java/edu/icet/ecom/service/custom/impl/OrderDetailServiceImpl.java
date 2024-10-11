@@ -34,8 +34,8 @@ public class OrderDetailServiceImpl implements OrderDetailsService {
     }
 
     @Override
-    public boolean delete(Integer id) {
-        return false;
+    public boolean delete(String id) {
+        return orderDetailsDao.delete(id);
     }
 
     @Override
@@ -49,23 +49,34 @@ public class OrderDetailServiceImpl implements OrderDetailsService {
     }
 
     @Override
-    public Orders getById(Integer id) {
-        return null;
+    public Orders getById(String id) {
+        return new ModelMapper().map(orderDetailsDao.getById(id),Orders.class);
     }
 
     @Override
     public Admin getAdmin(String username) {
         AdminDaoImpl adminDao = DaoFactory.getInstance().getDaoType(DaoType.ADMIN);
-        return new ModelMapper().map(adminDao.getByUsername(username),Admin.class);
+        return new ModelMapper().map(adminDao.getById(username),Admin.class);
     }
 
     @Override
-    public List<Integer> getAllids() {
+    public List<String> getAllids() {
         return serviceType.getAllIds();
     }
 
     @Override
-    public Inventory getByIdItem(Integer id) {
-        return serviceType.getById(id);
+    public Inventory getByIdItem(String itemCode) {
+        return serviceType.getById(itemCode);
+    }
+
+    @Override
+    public String getOrderId() {
+        edu.icet.ecom.entity.Orders lastOrder = orderDetailsDao.getHigestId();
+        if (lastOrder==null){
+            return "OR-1";
+        }
+        String orderId = lastOrder.getOrderId();
+        int currentOrderId = Integer.parseInt(orderId.substring(3));
+        return "OR-"+ ++currentOrderId;
     }
 }
