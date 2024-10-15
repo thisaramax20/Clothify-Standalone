@@ -18,16 +18,16 @@ public class AdminServiceImpl implements AdminService {
     public boolean save(Admin admin) {
         edu.icet.ecom.entity.Admin admin1 = new ModelMapper().map(admin, edu.icet.ecom.entity.Admin.class);
         admin1.setHashedPassword(EncryptPassword.hashingPassword(admin.getPassword()));
-        edu.icet.ecom.entity.Admin higestIdAdmin = adminDao.getHigestId();
-        String username = "";
-        if (higestIdAdmin==null){
-            admin1.setUsername("AD-1");
-        }else{
-            String num = username.substring(3);
-            int i = Integer.parseInt(num);
-            i++;
-            admin1.setUsername("AD-"+i);
-        }
+//        edu.icet.ecom.entity.Admin higestIdAdmin = adminDao.getHigestId();
+//        if (higestIdAdmin==null){
+//            admin1.setUsername("AD-1");
+//        }else{
+//            String num = higestIdAdmin.getUsername().substring(3);
+//            int i = Integer.parseInt(num);
+//            i++;
+//            admin1.setUsername("AD-"+i);
+//        }
+        admin1.setUsername("MN-EX-01");
         return adminDao.save(admin1);
     }
 

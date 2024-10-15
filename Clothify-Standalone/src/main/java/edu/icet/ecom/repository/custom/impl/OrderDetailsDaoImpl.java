@@ -4,7 +4,10 @@ import edu.icet.ecom.entity.Inventory;
 import edu.icet.ecom.entity.OrderDetails;
 import edu.icet.ecom.entity.Orders;
 import edu.icet.ecom.entity.Supplier;
+import edu.icet.ecom.repository.DaoFactory;
+import edu.icet.ecom.repository.SuperDao;
 import edu.icet.ecom.repository.custom.OrderDetailsDao;
+import edu.icet.ecom.util.DaoType;
 import edu.icet.ecom.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -21,8 +24,8 @@ public class OrderDetailsDaoImpl implements OrderDetailsDao {
             List<edu.icet.ecom.entity.OrderDetails> orderDetails = entity.getOrderDetails();
             for (OrderDetails details : orderDetails){
                 session.persist(details);
-
-                Inventory inventory = session.get(Inventory.class, details.getItemCode());
+                InventoryDaoImpl inventoryDao = DaoFactory.getInstance().getDaoType(DaoType.INVENTORY);
+                Inventory inventory = inventoryDao.getById(details.getItemCode());
                 if (inventory!=null){
                     inventory.setQuantity(inventory.getQuantity()-details.getQuantity());
                     session.merge(inventory);

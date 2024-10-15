@@ -20,7 +20,7 @@ public class Orders {
     private String customerEmail;
     private String orderId;
     private String paymentType;
-    private Double total;
+    private Double netTotal;
     private Integer adminId;
     private String adminName;
     @Transient

@@ -12,6 +12,7 @@ import edu.icet.ecom.repository.custom.impl.OrderDetailsDaoImpl;
 import edu.icet.ecom.service.ServiceFactory;
 import edu.icet.ecom.service.custom.OrderDetailsService;
 import edu.icet.ecom.util.DaoType;
+import edu.icet.ecom.util.JasperReports;
 import edu.icet.ecom.util.ServiceType;
 import org.modelmapper.ModelMapper;
 
@@ -30,7 +31,12 @@ public class OrderDetailServiceImpl implements OrderDetailsService {
             orderDetails.add(new ModelMapper().map(orderDetails1,OrderDetails.class));
         });
         orders1.setOrderDetails(orderDetails);
-        return orderDetailsDao.save(orders1);
+        if (orderDetailsDao.save(orders1)){
+            JasperReports.getInstance().createInvoice(orders);
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
