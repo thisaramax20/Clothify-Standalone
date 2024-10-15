@@ -141,9 +141,6 @@ public class OrderManagementSuperFormController implements Initializable {
         }
     }
 
-    public void btnUpdateItemOnAction(ActionEvent actionEvent) {
-    }
-
     public void btnSearchOrderOnAction(ActionEvent actionEvent) {
         Orders byId = orderDetail.getById(txtOrderId.getText());
         ObservableList<OrderDetails> orderDetails1 = FXCollections.observableArrayList();

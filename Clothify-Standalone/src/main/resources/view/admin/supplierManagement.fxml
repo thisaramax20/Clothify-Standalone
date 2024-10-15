@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.ecom.controller.admin.SupplierManagementFormController">
    <left>
@@ -102,6 +103,14 @@
             </TableView>
             <Label layoutX="376.0" layoutY="263.0" text="Item Category" />
             <JFXComboBox fx:id="cmbItemCategory" layoutX="374.0" layoutY="284.0" />
+            <Label layoutX="388.0" layoutY="34.0" text="ID">
+               <font>
+                  <Font name="System Italic" size="12.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="txtId" layoutX="388.0" layoutY="46.0" prefHeight="26.0" prefWidth="84.0" promptText="auto generated" />
+            <Label layoutX="108.0" layoutY="272.0" text="Item Code" />
+            <JFXTextField fx:id="txtItemCode" layoutX="108.0" layoutY="284.0" prefHeight="26.0" prefWidth="98.0" />
          </children>
       </AnchorPane>
    </center>
