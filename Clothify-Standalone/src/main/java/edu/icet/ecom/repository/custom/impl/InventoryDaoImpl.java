@@ -1,6 +1,7 @@
 package edu.icet.ecom.repository.custom.impl;
 
 import edu.icet.ecom.entity.Admin;
+import edu.icet.ecom.entity.CompositePK_SupplierItem;
 import edu.icet.ecom.entity.Inventory;
 import edu.icet.ecom.repository.custom.InventoryDao;
 import edu.icet.ecom.util.HibernateUtil;
@@ -34,7 +35,7 @@ public class InventoryDaoImpl implements InventoryDao {
     public boolean update(Inventory entity) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Inventory inventory = getById(entity.getItemCode());
+        Inventory inventory = session.get(Inventory.class,entity.getId());
         inventory.setCategory(entity.getCategory());
         inventory.setName(entity.getName());
         inventory.setQuantity(entity.getQuantity());
@@ -60,9 +61,12 @@ public class InventoryDaoImpl implements InventoryDao {
     public Inventory getById(String id) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Inventory inventory = session.createQuery("SELECT a FROM Inventory a WHERE a.itemCode=:itemCode", Inventory.class)
-                .setParameter("itemCode", id)
-                .getSingleResultOrNull();
+
+        String supplierId = "";
+        for (Inventory inventory:getAll()){
+            if (inventory.getId().getItemCode().equals(id)) supplierId = inventory.getId().getSupplierId();
+        }
+        Inventory inventory = searchByCompositePK(new CompositePK_SupplierItem(supplierId, id));
         session.close();
         return inventory;
     }
@@ -91,5 +95,26 @@ public class InventoryDaoImpl implements InventoryDao {
         byte[] imageData = inventory.getImageData();
         session.close();
         return imageData;
+    }
+
+    @Override
+    public boolean deleteByCompositePK(CompositePK_SupplierItem compositePKSupplierItem) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Inventory inventory = session.get(Inventory.class,compositePKSupplierItem);
+        session.remove(inventory);
+        session.getTransaction().commit();
+        session.close();
+        return true;
+    }
+
+    @Override
+    public Inventory searchByCompositePK(CompositePK_SupplierItem compositePKSupplierItem) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        Inventory inventory = session.get(Inventory.class,compositePKSupplierItem);
+        if (inventory!=null){
+            return inventory;
+        }else return null;
     }
 }

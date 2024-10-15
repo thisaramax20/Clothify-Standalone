@@ -11,12 +11,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@IdClass(CompositePK_SupplierItem.class)
+
 public class SupplierItem {
-    @Id
-    private String supplierId;
-    @Id
-    private String itemCode;
+    @EmbeddedId
+    private CompositePK_SupplierItem compositePKSupplierItem ;
     private String name;
     private String category;
 }

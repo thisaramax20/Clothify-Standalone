@@ -16,7 +16,7 @@ import lombok.Setter;
 @Entity
 public class Supplier {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String supplierCode;
     private String nic;

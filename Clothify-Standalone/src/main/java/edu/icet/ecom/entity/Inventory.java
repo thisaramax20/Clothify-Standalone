@@ -12,10 +12,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 public class Inventory {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
-    private String itemCode;
+    @EmbeddedId
+    private CompositePK_SupplierItem id;
+
     private String name;
     private String size;
     private Double price;
@@ -24,4 +23,12 @@ public class Inventory {
     @Lob
     @Column(columnDefinition = "LONGBLOB")
     private byte[] imageData;
+
+    @OneToOne
+    @JoinColumns({
+            @JoinColumn(name = "itemCode",updatable = false,insertable = false),
+            @JoinColumn(name = "supplierId",insertable = false,updatable = false)
+    })
+    private SupplierItem supplierItem;
+    private String supplierIdTemp;
 }

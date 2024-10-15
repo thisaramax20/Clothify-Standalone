@@ -20,7 +20,7 @@ public class SupplierServiceImpl implements SupplierService {
         if (higestId==null){
             supplier1.setSupplierCode("SP-1");
         }else{
-            int currentId = Integer.parseInt(higestId.getSupplierCode());
+            int currentId = Integer.parseInt(higestId.getSupplierCode().substring(3));
             supplier1.setSupplierCode("SP-"+ ++currentId);
         }
         return supplierDao.save(supplier1);

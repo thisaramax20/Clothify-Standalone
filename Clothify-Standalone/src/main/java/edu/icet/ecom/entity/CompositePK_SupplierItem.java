@@ -1,5 +1,6 @@
 package edu.icet.ecom.entity;
 
+import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.Objects;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Embeddable
 public class CompositePK_SupplierItem implements Serializable {
     private String supplierId;
     private String itemCode;

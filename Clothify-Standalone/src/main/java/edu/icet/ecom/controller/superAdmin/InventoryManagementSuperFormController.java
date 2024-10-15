@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import edu.icet.ecom.controller.LandingPageController;
 import edu.icet.ecom.dto.Inventory;
+import edu.icet.ecom.entity.CompositePK_SupplierItem;
 import edu.icet.ecom.service.ServiceFactory;
 import edu.icet.ecom.service.SuperService;
 import edu.icet.ecom.service.custom.impl.InventoryServiceImpl;
@@ -48,6 +49,8 @@ public class InventoryManagementSuperFormController implements Initializable {
     InventoryServiceImpl service = ServiceFactory.getInstance().getServiceType(ServiceType.INVENTORY);
     private String imageFilePath;
     public static Stage stage = LandingPageController.getStage();
+    private Inventory inventory1;
+    private List<Inventory> all;
 
     public void btnLoadHomePageOnAction(MouseEvent mouseEvent) {
         stage.close();
@@ -114,21 +117,7 @@ public class InventoryManagementSuperFormController implements Initializable {
     }
 
     public void btnAddItemOnAction(ActionEvent actionEvent) {
-        boolean executed = service.save(new Inventory(null,
-                null,
-                txtName.getText(),
-                cmbSize.getValue(),
-                Double.parseDouble(txtPrice.getText()),
-                cmbCategory.getValue(),
-                Integer.parseInt(txtQuantity.getText()),
-                imageFilePath)
-        );
-        if (executed){
-            new Alert(Alert.AlertType.INFORMATION,"Successful").show();
-            loadTable();
-        }else {
-            new Alert(Alert.AlertType.ERROR,"Error").show();
-        }
+
     }
 
     public void btnDeleteItemOnAction(ActionEvent actionEvent) {
@@ -142,14 +131,13 @@ public class InventoryManagementSuperFormController implements Initializable {
     }
 
     public void btnUpdateItemOnAction(ActionEvent actionEvent) {
-        boolean executed = service.update(new Inventory(null,
-                txtId.getText(),
+        boolean executed = service.update(new Inventory(inventory1.getId(),
                 txtName.getText(),
                 cmbSize.getValue(),
                 Double.parseDouble(txtPrice.getText()),
                 cmbCategory.getValue(),
                 Integer.parseInt(txtQuantity.getText()),
-                imageFilePath)
+                imageFilePath, null,inventory1.getSupplierIdTemp())
         );
         if (executed){
             new Alert(Alert.AlertType.INFORMATION,"Successful").show();
@@ -199,25 +187,28 @@ public class InventoryManagementSuperFormController implements Initializable {
         colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         loadTable();
         tblInventory.getSelectionModel().selectedItemProperty().addListener((observableValue, previous, current) -> {
-            if (current!=null) setSelectedValues(current);
+            if (current!=null) {
+                inventory1 = current;
+                setSelectedValues(current);
+            }
         });
     }
 
     private void loadTable(){
-        List<Inventory> all = service.getAll();
+        all = service.getAll();
         ObservableList<Inventory> inventories = FXCollections.observableArrayList();
         inventories.addAll(all);
         tblInventory.setItems(inventories);
     }
 
     private void setSelectedValues(Inventory inventory){
-        txtId.setText(inventory.getItemCode());
-        txtQuantity.setText(inventory.getQuantity().toString());
-        txtPrice.setText(inventory.getPrice().toString());
+        txtId.setText(inventory.getId().getItemCode());
         txtName.setText(inventory.getName());
         cmbCategory.setValue(inventory.getCategory());
+        txtQuantity.setText(inventory.getQuantity().toString());
+        txtPrice.setText(inventory.getPrice().toString());
         cmbSize.setValue(inventory.getSize());
-        Image image = service.getImage(inventory.getItemCode());
+        Image image = service.getImage(inventory.getId().getItemCode());
         imageView.setImage(image);
     }
 

@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 public class Orders {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String customerEmail;
     private String orderId;

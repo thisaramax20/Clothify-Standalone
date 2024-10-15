@@ -1,6 +1,7 @@
 package edu.icet.ecom.service.custom.impl;
 
 import edu.icet.ecom.dto.Inventory;
+import edu.icet.ecom.entity.CompositePK_SupplierItem;
 import edu.icet.ecom.repository.DaoFactory;
 import edu.icet.ecom.repository.custom.impl.InventoryDaoImpl;
 import edu.icet.ecom.service.custom.InventoryService;
@@ -34,19 +35,17 @@ public class InventoryServiceImpl implements InventoryService {
             }
         }else inventoryEntity.setImageData(null);
 
-        edu.icet.ecom.entity.Inventory highestId = inventoryDao.getHigestId();
-        if (highestId==null){
-            inventoryEntity.setItemCode("IN-1");
-        }else {
-            int currentId = Integer.parseInt(highestId.getItemCode().substring(3));
-            inventoryEntity.setItemCode("IN-"+ ++currentId);
-        }
+        inventoryEntity.getId().setItemCode(inventoryEntity.getSupplierItem().getCompositePKSupplierItem().getItemCode());
         return inventoryDao.save(inventoryEntity);
     }
 
     @Override
-    public boolean delete(String itemCode) {
-        return inventoryDao.delete(itemCode);
+    public boolean delete(String id) {
+        String supplierId = "";
+        for (Inventory inventory :getAll()){
+            if (inventory.getId().getItemCode().equals(id)) supplierId = inventory.getId().getSupplierId();
+        }
+        return inventoryDao.deleteByCompositePK(new CompositePK_SupplierItem(supplierId,id));
     }
 
     @Override
@@ -82,8 +81,13 @@ public class InventoryServiceImpl implements InventoryService {
     }
 
     @Override
-    public Inventory getById(String itemCode) {
-        return new ModelMapper().map(inventoryDao.getById(itemCode), Inventory.class);
+    public Inventory getById(String id) {
+        String supplierId = "";
+        for (Inventory inventory :getAll()){
+            if (inventory.getId().getItemCode().equals(id)) supplierId = inventory.getId().getSupplierId();
+        }
+        return new ModelMapper().map(inventoryDao.searchByCompositePK(new CompositePK_SupplierItem(supplierId,
+                id)), Inventory.class);
     }
 
     @Override
@@ -98,7 +102,7 @@ public class InventoryServiceImpl implements InventoryService {
     public List<String> getAllIds() {
         List<Inventory> all = getAll();
         ArrayList<String > ids = new ArrayList<>();
-        all.forEach(inventory -> ids.add(inventory.getItemCode()));
+        all.forEach(inventory -> ids.add(inventory.getId().getItemCode()));
         return ids;
     }
 }

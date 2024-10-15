@@ -25,19 +25,22 @@ public class SupplierItemServiceImpl implements SupplierItemService {
         edu.icet.ecom.entity.SupplierItem supplierItem1 = new ModelMapper().map(supplierItem, edu.icet.ecom.entity.SupplierItem.class);
         InventoryDaoImpl inventoryDao = DaoFactory.getInstance().getDaoType(DaoType.INVENTORY);
         Inventory higestId = inventoryDao.getHigestId();
+        CompositePK_SupplierItem compositePKSupplierItem;
         if (higestId!=null){
-            int currentId = Integer.parseInt(higestId.getItemCode().substring(3));
-            supplierItem1.setItemCode("IN-"+ ++currentId);
+            int currentId = Integer.parseInt(higestId.getSupplierItem().getCompositePKSupplierItem().getItemCode().substring(3));
+            compositePKSupplierItem = new CompositePK_SupplierItem(supplierItem.getSupplierId(),"IN-"+ ++currentId);
         }else {
-            supplierItem1.setItemCode("IN-"+1);
+            compositePKSupplierItem = new CompositePK_SupplierItem(supplierItem.getSupplierId(),"IN-1");
         }
+        supplierItem1.setCompositePKSupplierItem(compositePKSupplierItem);
         boolean executed = supplierItemDao.save(supplierItem1);
         if (executed){
             InventoryServiceImpl inventoryService = ServiceFactory.getInstance().getServiceType(ServiceType.INVENTORY);
-            return inventoryService.save(new edu.icet.ecom.dto.Inventory(null,
-                    null, supplierItem.getName(),
+            return inventoryService.save(new edu.icet.ecom.dto.Inventory(compositePKSupplierItem,
+                    supplierItem.getName(),
                     null, null, supplierItem.getCategory(),
-                    null, null));
+                    null, null,
+                    supplierItem1,null));
         }else return false;
     }
 
