@@ -11,4 +11,5 @@ public interface AdminService extends SuperService {
     boolean update(Admin admin);
     List<Admin> getAll();
     Admin getById(String username);
+    boolean changePassword(String username,String newPassword);
 }
