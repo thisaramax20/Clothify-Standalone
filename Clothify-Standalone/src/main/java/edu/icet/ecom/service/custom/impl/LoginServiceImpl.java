@@ -2,7 +2,6 @@ package edu.icet.ecom.service.custom.impl;
 
 import edu.icet.ecom.entity.Admin;
 import edu.icet.ecom.repository.DaoFactory;
-import edu.icet.ecom.repository.SuperDao;
 import edu.icet.ecom.repository.custom.impl.AdminDaoImpl;
 import edu.icet.ecom.service.custom.LoginService;
 import edu.icet.ecom.util.DaoType;
@@ -24,7 +23,7 @@ public class LoginServiceImpl implements LoginService {
     public String sendEmail(String username) {
         Admin admin = adminDao.getById(username);
         String otp = OtpGenerator.generateOtp(6);
-        EmailSending.sendEmail(admin.getEmail(), otp);
+        EmailSending.sendOTP(admin.getEmail(), otp);
         return otp;
     }
 }

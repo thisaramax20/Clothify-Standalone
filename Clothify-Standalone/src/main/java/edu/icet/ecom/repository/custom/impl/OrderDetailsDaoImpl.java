@@ -50,10 +50,33 @@ public class OrderDetailsDaoImpl implements OrderDetailsDao {
     @Override
     public boolean delete(String id) {
         Session session = HibernateUtil.getSession();
-        session.getTransaction().begin();
-        Orders byId = getById(id);
-        session.remove(byId);
-        session.close();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            List<edu.icet.ecom.entity.OrderDetails> orderDetails = getByIdOrderDetails(id);
+            for (OrderDetails details : orderDetails){
+                InventoryDaoImpl inventoryDao = DaoFactory.getInstance().getDaoType(DaoType.INVENTORY);
+                Inventory inventory = inventoryDao.getById(details.getItemCode());
+                if (inventory!=null){
+                    inventory.setQuantity(inventory.getQuantity()+details.getQuantity());
+                    session.update(inventory);
+                }else {
+                    return false;
+                }
+                session.remove(details);
+            }
+            Orders byId = getById(id);
+            session.remove(byId);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction!=null){
+                transaction.rollback();
+                e.printStackTrace();
+                return false;
+            }
+        }finally {
+            session.close();
+        }
         return true;
     }
 
@@ -97,4 +120,14 @@ public class OrderDetailsDaoImpl implements OrderDetailsDao {
         }
     }
 
+    @Override
+    public List<OrderDetails> getByIdOrderDetails(String orderId) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        List<OrderDetails> orderDetails = session.createQuery("SELECT a FROM OrderDetails a WHERE a.orderId=:orderId", OrderDetails.class)
+                .setParameter("orderId", orderId)
+                        .getResultList();
+        session.close();
+        return orderDetails;
+    }
 }

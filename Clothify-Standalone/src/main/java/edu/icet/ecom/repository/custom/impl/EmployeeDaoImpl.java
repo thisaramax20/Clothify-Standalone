@@ -61,7 +61,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         session.getTransaction().begin();
         Employee employee = session.createQuery("SELECT a FROM Employee a WHERE a.username=:username", Employee.class)
                 .setParameter("username", id)
-                .getSingleResult();
+                .getSingleResultOrNull();
         session.close();
         return employee;
     }
@@ -73,7 +73,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         try {
             return session.createQuery("SELECT a FROM Employee a ORDER BY a.id DESC", Employee.class)
                     .setMaxResults(1)
-                    .getSingleResult();
+                    .getSingleResultOrNull();
         } catch (Exception e) {
             return null;
         }finally {

@@ -16,7 +16,7 @@ public class JasperReports {
         return instance==null?instance=new JasperReports():instance;
     }
 
-    public void createInvoice(Orders orders){
+    public String createInvoice(Orders orders){
         String jasperFilePath = "D:\\University\\A ICET\\Level 3\\Standalone apps\\Clothing Shop\\Application\\Clothify-Standalone\\src\\main\\resources\\jasperReports\\compiledTemplates\\Blank.jasper";
         try {
             JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(jasperFilePath);
@@ -32,10 +32,14 @@ public class JasperReports {
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters,orderDataSource);
 
-            JasperExportManager.exportReportToPdfFile(jasperPrint,"D:\\University\\A ICET\\Level 3\\Standalone apps\\Clothing Shop\\Application\\Clothify-Standalone\\src\\main\\resources\\jasperReports\\outputReports\\Sample.pdf");
+            String exportFilePath = "D:\\University\\A ICET\\Level 3\\Standalone apps\\Clothing Shop\\Application\\Clothify-Standalone\\src\\main\\resources\\jasperReports\\outputReports\\Sample.pdf";
+
+            JasperExportManager.exportReportToPdfFile(jasperPrint,exportFilePath);
             System.out.println("Successful");
+            return exportFilePath;
         } catch (JRException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return null;
         }
     }
 }

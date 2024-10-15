@@ -15,4 +15,5 @@ public interface OrderDetailsService extends SuperService {
     List<String> getAllids();
     Inventory getByIdItem(String itemCode);
     String getOrderId();
+    List<OrderDetails> getOrderDetails(String orderId);
 }

@@ -51,7 +51,7 @@ public class SupplierItemDaoImpl implements SupplierItemDao {
         try {
             return session.createQuery("SELECT a FROM SupplierItem a ORDER BY a.id DESC", SupplierItem.class)
                     .setMaxResults(1)
-                    .getSingleResult();
+                    .getSingleResultOrNull();
         } catch (Exception e) {
             return null;
         }finally {

@@ -61,7 +61,7 @@ public class AdminDaoImpl implements AdminDao {
         session.getTransaction().begin();
         Admin admin = session.createQuery("SELECT a FROM Admin a WHERE a.username=:username", Admin.class)
                 .setParameter("username", id)
-                .getSingleResult();
+                .getSingleResultOrNull();
         session.close();
         return admin;
     }
@@ -74,7 +74,7 @@ public class AdminDaoImpl implements AdminDao {
         try {
             admin = session.createQuery("SELECT a FROM Admin a ORDER BY a.id DESC", Admin.class)
                     .setMaxResults(1)
-                    .getSingleResult();
+                    .getSingleResultOrNull();
             return admin;
         } catch (Exception e) {
             return null;

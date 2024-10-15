@@ -160,7 +160,12 @@ public class InventoryManagementSuperFormController implements Initializable {
     }
 
     public void btnSearchItemOnAction(ActionEvent actionEvent) {
-        service.getById(txtId.getText());
+        Inventory byId = service.getById(txtId.getText());
+        if (byId!=null){
+            setSelectedValues(byId);
+        }else {
+            new Alert(Alert.AlertType.ERROR,"There is no item by that code.").show();
+        }
     }
 
     public void btnClearFieldsOnAction(ActionEvent actionEvent) {

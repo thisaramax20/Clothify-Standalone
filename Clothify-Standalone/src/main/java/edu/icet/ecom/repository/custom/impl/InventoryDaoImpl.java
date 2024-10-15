@@ -23,7 +23,7 @@ public class InventoryDaoImpl implements InventoryDao {
     public boolean delete(String id) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Inventory inventory = session.get(Inventory.class, id);
+        Inventory inventory = getById(id);
         session.remove(inventory);
         session.getTransaction().commit();
         session.close();
@@ -61,7 +61,7 @@ public class InventoryDaoImpl implements InventoryDao {
         session.getTransaction().begin();
         Inventory inventory = session.createQuery("SELECT a FROM Inventory a WHERE a.itemCode=:itemCode", Inventory.class)
                 .setParameter("itemCode", id)
-                .getSingleResult();
+                .getSingleResultOrNull();
         session.close();
         return inventory;
     }

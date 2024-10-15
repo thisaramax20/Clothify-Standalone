@@ -163,13 +163,19 @@ public class OrderManagementFormController implements Initializable {
     }
 
     public void btnSearchOrderOnAction(ActionEvent actionEvent) {
-        Orders byId = orderDetail.getById(txtOrderId.getText());
+        List<OrderDetails> detailsDto = orderDetail.getOrderDetails(txtOrderId.getText());
         ObservableList<OrderDetails> orderDetails1 = FXCollections.observableArrayList();
-        byId.getOrderDetails().forEach(orderDetails -> orderDetails1.add(orderDetails));
+        orderDetails1.addAll(detailsDto);
         tblOrders.setItems(orderDetails1);
     }
 
     public void btnCancelOrderOnAction(ActionEvent actionEvent) {
+        boolean executed = orderDetail.delete(txtOrderId.getText());
+        if (executed){
+            new Alert(Alert.AlertType.INFORMATION,"Success").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Error").show();
+        }
     }
 
     private void setAdminDetails(){

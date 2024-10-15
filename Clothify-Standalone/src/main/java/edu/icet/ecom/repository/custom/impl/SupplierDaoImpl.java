@@ -69,7 +69,7 @@ public class SupplierDaoImpl implements SupplierDao {
         try {
             return session.createQuery("SELECT a FROM Supplier a ORDER BY a.id DESC", Supplier.class)
                     .setMaxResults(1)
-                    .getSingleResult();
+                    .getSingleResultOrNull();
         } catch (Exception e) {
             return null;
         }finally {

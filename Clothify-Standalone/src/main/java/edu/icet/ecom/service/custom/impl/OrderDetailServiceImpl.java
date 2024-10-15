@@ -12,6 +12,7 @@ import edu.icet.ecom.repository.custom.impl.OrderDetailsDaoImpl;
 import edu.icet.ecom.service.ServiceFactory;
 import edu.icet.ecom.service.custom.OrderDetailsService;
 import edu.icet.ecom.util.DaoType;
+import edu.icet.ecom.util.EmailSending;
 import edu.icet.ecom.util.JasperReports;
 import edu.icet.ecom.util.ServiceType;
 import org.modelmapper.ModelMapper;
@@ -32,7 +33,8 @@ public class OrderDetailServiceImpl implements OrderDetailsService {
         });
         orders1.setOrderDetails(orderDetails);
         if (orderDetailsDao.save(orders1)){
-            JasperReports.getInstance().createInvoice(orders);
+            String invoiceFilePath = JasperReports.getInstance().createInvoice(orders);
+            if (invoiceFilePath!=null) EmailSending.sendInvoice(orders.getCustomerEmail(),invoiceFilePath);
             return true;
         }else {
             return false;
@@ -84,5 +86,14 @@ public class OrderDetailServiceImpl implements OrderDetailsService {
         String orderId = lastOrder.getOrderId();
         int currentOrderId = Integer.parseInt(orderId.substring(3));
         return "OR-"+ ++currentOrderId;
+    }
+
+    @Override
+    public List<edu.icet.ecom.dto.OrderDetails> getOrderDetails(String orderId) {
+        List<OrderDetails> byIdOrderDetails = orderDetailsDao.getByIdOrderDetails(orderId);
+        ArrayList<edu.icet.ecom.dto.OrderDetails> orderDetails = new ArrayList<>();
+        ModelMapper mapper = new ModelMapper();
+        byIdOrderDetails.forEach(orderDetails1 -> orderDetails.add(mapper.map(orderDetails1,edu.icet.ecom.dto.OrderDetails.class)));
+        return orderDetails;
     }
 }
