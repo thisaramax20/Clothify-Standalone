@@ -14,10 +14,9 @@ import lombok.Setter;
 @IdClass(CompositePK_SupplierItem.class)
 public class SupplierItem {
     @Id
-    private Integer supplierId;
+    private String supplierId;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer itemCode;
+    private String itemCode;
     private String name;
     private String category;
 }

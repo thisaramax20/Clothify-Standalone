@@ -18,24 +18,27 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     public boolean save(Inventory inventory) {
         edu.icet.ecom.entity.Inventory inventoryEntity = new ModelMapper().map(inventory, edu.icet.ecom.entity.Inventory.class);
-        File imageFile = new File(inventory.getImagePath());
-        try {
-            FileInputStream inputStream = new FileInputStream(imageFile);
-            byte[] imageBytes = new byte[(int) imageFile.length()];
-            inputStream.read(imageBytes);
-            inputStream.close();
+        if (inventory.getImagePath()!=null){
+            File imageFile = new File(inventory.getImagePath());
+            try {
+                FileInputStream inputStream = new FileInputStream(imageFile);
+                byte[] imageBytes = new byte[(int) imageFile.length()];
+                inputStream.read(imageBytes);
+                inputStream.close();
 
-            inventoryEntity.setImageData(imageBytes);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        edu.icet.ecom.entity.Inventory higestId = inventoryDao.getHigestId();
-        if (higestId==null){
+                inventoryEntity.setImageData(imageBytes);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else inventoryEntity.setImageData(null);
+
+        edu.icet.ecom.entity.Inventory highestId = inventoryDao.getHigestId();
+        if (highestId==null){
             inventoryEntity.setItemCode("IN-1");
         }else {
-            int currentId = Integer.parseInt(higestId.getItemCode().substring(3));
+            int currentId = Integer.parseInt(highestId.getItemCode().substring(3));
             inventoryEntity.setItemCode("IN-"+ ++currentId);
         }
         return inventoryDao.save(inventoryEntity);
@@ -48,7 +51,26 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public boolean update(Inventory inventory) {
-        return inventoryDao.update(new ModelMapper().map(inventory,edu.icet.ecom.entity.Inventory.class));
+        edu.icet.ecom.entity.Inventory inventory1 = new ModelMapper().map(inventory, edu.icet.ecom.entity.Inventory.class);
+        if (inventory.getImagePath()!=null){
+            File imageFile = new File(inventory.getImagePath());
+            try {
+                FileInputStream inputStream = new FileInputStream(imageFile);
+                byte[] imageBytes = new byte[(int) imageFile.length()];
+                inputStream.read(imageBytes);
+                inputStream.close();
+
+                inventory1.setImageData(imageBytes);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }else {
+            inventory1.setImageData(null);
+        }
+
+        return inventoryDao.update(inventory1);
     }
 
     @Override
@@ -67,6 +89,7 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     public Image getImage(String itemCode) {
         byte[] imageData = inventoryDao.getImageData(itemCode);
+        System.out.println(imageData);
         ByteArrayInputStream bis = new ByteArrayInputStream(imageData);
         return new Image(bis);
     }

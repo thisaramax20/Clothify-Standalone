@@ -13,5 +13,5 @@ public interface SupplierService extends SuperService {
     boolean update(Supplier supplier);
     List<Supplier> getAll();
     Supplier getById(String supplierCode);
-    List<Integer> getAllIds();
+    List<String> getAllIds();
 }

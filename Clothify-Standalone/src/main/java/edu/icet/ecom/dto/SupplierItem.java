@@ -10,8 +10,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SupplierItem {
-    private Integer supplierId;
-    private Integer itemCode;
+    private String supplierId;
+    private String itemCode;
     private String name;
     private String category;
 }

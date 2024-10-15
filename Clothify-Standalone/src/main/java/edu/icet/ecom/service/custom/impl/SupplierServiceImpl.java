@@ -50,10 +50,10 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public List<Integer> getAllIds() {
+    public List<String> getAllIds() {
         List<Supplier> all = getAll();
-        ArrayList<Integer> ids = new ArrayList<>();
-        all.forEach(supplier -> ids.add(supplier.getId()));
+        ArrayList<String> ids = new ArrayList<>();
+        all.forEach(supplier -> ids.add(supplier.getSupplierCode()));
         return ids;
     }
 }

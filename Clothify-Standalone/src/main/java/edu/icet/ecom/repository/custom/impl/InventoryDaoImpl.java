@@ -40,6 +40,7 @@ public class InventoryDaoImpl implements InventoryDao {
         inventory.setQuantity(entity.getQuantity());
         inventory.setSize(entity.getSize());
         inventory.setPrice(entity.getPrice());
+        inventory.setImageData(entity.getImageData());
         session.merge(inventory);
         session.getTransaction().commit();
         session.close();
@@ -73,7 +74,7 @@ public class InventoryDaoImpl implements InventoryDao {
         try {
             return session.createQuery("SELECT a FROM Inventory a ORDER BY a.id DESC", Inventory.class)
                     .setMaxResults(1)
-                    .getSingleResult();
+                    .getSingleResultOrNull();
         } catch (Exception e) {
             return null;
         }finally {

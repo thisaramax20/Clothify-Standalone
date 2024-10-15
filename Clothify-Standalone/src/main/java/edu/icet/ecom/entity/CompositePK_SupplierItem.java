@@ -13,8 +13,8 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompositePK_SupplierItem implements Serializable {
-    private Integer supplierId;
-    private Integer itemCode;
+    private String supplierId;
+    private String itemCode;
 
     @Override
     public boolean equals(Object o) {

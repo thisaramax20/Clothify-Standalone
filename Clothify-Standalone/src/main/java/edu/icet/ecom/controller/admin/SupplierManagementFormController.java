@@ -38,7 +38,7 @@ public class SupplierManagementFormController implements Initializable {
     public TableColumn colName;
     public TableColumn colCompany;
     public JFXTextField txtItemName;
-    public JFXComboBox<Integer> cmbSupplierId;
+    public JFXComboBox<String> cmbSupplierId;
     public TableView<SupplierItem> tblItemSupplier;
     public TableColumn colSupplierID;
     public TableColumn colItemCode;
@@ -101,7 +101,7 @@ public class SupplierManagementFormController implements Initializable {
                 cmbItemCategory.getValue()
         ));
         if (executed){
-            new Alert(Alert.AlertType.INFORMATION,"Success").show();
+            new Alert(Alert.AlertType.INFORMATION,"Item added. Please edit the inventory tab for what you just added.").show();
             loadTable2();
         }else {
             new Alert(Alert.AlertType.ERROR,"Error").show();
@@ -110,7 +110,7 @@ public class SupplierManagementFormController implements Initializable {
 
     public void btnDeleteItemOnAction(ActionEvent actionEvent) {
         boolean executed = supplierItemService.delete(new CompositePK_SupplierItem(cmbSupplierId.getValue(),
-                Integer.parseInt(txtItemCode.getText())));
+                txtItemCode.getText()));
         if (executed){
             new Alert(Alert.AlertType.INFORMATION,"Success").show();
             loadTable2();
@@ -121,9 +121,9 @@ public class SupplierManagementFormController implements Initializable {
 
     public void btnUpdateItemOnAction(ActionEvent actionEvent) {
         boolean executed = supplierItemService.update(new SupplierItem(cmbSupplierId.getValue(),
-                Integer.parseInt(txtItemCode.getText()
-                ), txtItemName.getText(), cmbItemCategory.getValue()), new CompositePK_SupplierItem(cmbSupplierId.getValue(),
-                Integer.parseInt(txtItemCode.getText())));
+                txtItemCode.getText()
+                , txtItemName.getText(), cmbItemCategory.getValue()), new CompositePK_SupplierItem(cmbSupplierId.getValue(),
+                txtItemCode.getText()));
         if (executed){
             new Alert(Alert.AlertType.INFORMATION,"Success").show();
             loadTable2();
@@ -134,7 +134,7 @@ public class SupplierManagementFormController implements Initializable {
 
     public void btnSearchItemOnAction(ActionEvent actionEvent) {
         supplierItemService.getById(new CompositePK_SupplierItem(cmbSupplierId.getValue(),
-                Integer.parseInt(txtItemCode.getText())
+                txtItemCode.getText()
         ));
     }
 
@@ -146,7 +146,7 @@ public class SupplierManagementFormController implements Initializable {
         txtItemCode.setText("");
         cmbItemCategory.setValue("");
         txtItemName.setText("");
-        cmbSupplierId.setValue(0);
+        cmbSupplierId.setValue("");
     }
 
     private void loadTable2(){
@@ -220,8 +220,8 @@ public class SupplierManagementFormController implements Initializable {
     }
 
     private void setSupplierIds(){
-        List<Integer> allIds = supplierService.getAllIds();
-        ObservableList<Integer> ids = FXCollections.observableArrayList();
+        List<String> allIds = supplierService.getAllIds();
+        ObservableList<String> ids = FXCollections.observableArrayList();
         ids.addAll(allIds);
         cmbSupplierId.setItems(ids);
     }
