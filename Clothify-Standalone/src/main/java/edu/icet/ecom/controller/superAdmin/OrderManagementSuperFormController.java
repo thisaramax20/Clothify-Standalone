@@ -2,6 +2,7 @@ package edu.icet.ecom.controller.superAdmin;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import edu.icet.ecom.controller.LandingPageController;
 import edu.icet.ecom.controller.LoginFormController;
 import edu.icet.ecom.dto.Admin;
 import edu.icet.ecom.dto.Inventory;
@@ -16,15 +17,19 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
@@ -55,30 +60,74 @@ public class OrderManagementSuperFormController implements Initializable {
     private String admin;
     OrderDetailServiceImpl orderDetail = ServiceFactory.getInstance().getServiceType(ServiceType.ORDERDETAIL);
     ObservableList<OrderDetails> orderDetailsOngoing = FXCollections.observableArrayList();
+    public static Stage stage = LandingPageController.getStage();
     Double total = 0.0;
     private String adminName;
     private Integer adminId;
     private Integer stock;
 
     public void btnLoadHomePageOnAction(MouseEvent mouseEvent) {
+        stage.close();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../../../../../view/superAdmin/superAdminDashBoard.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void btnLoadAdminManagementPageOnAction(MouseEvent mouseEvent) {
+        stage.close();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../../../../../view/superAdmin/adminManagementSuper.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void btnLoadEmployeeManagementPageOnAction(MouseEvent mouseEvent) {
+        stage.close();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../../../../../view/superAdmin/employeeManagementSuper.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void btnLoadInventoryManagementPageOnAction(MouseEvent mouseEvent) {
+        stage.close();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../../../../../view/superAdmin/inventoryManagementSuper.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void btnLoadSupplierManagementPageOnAction(MouseEvent mouseEvent) {
+        stage.close();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../../../../../view/superAdmin/supplierManagementSuper.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void btnLoadOrderDetailPageOnAction(MouseEvent mouseEvent) {
+        return;
     }
 
     public void btnLoadReportManagementPageOnAction(MouseEvent mouseEvent) {
+        stage.close();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../../../../../view/superAdmin/reportManagementSuper.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void btnDeleteItemOnAction(ActionEvent actionEvent) {

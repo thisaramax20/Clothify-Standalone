@@ -21,14 +21,6 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="29.0" layoutY="78.0" onMouseClicked="#btnLoadAdminManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../assets/admin.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
             <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="29.0" layoutY="143.0" onMouseClicked="#btnLoadEmployeeManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/employee.png" />
@@ -37,7 +29,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="207.0" onMouseClicked="#btnLoadInventoryManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="22.0" layoutY="221.0" onMouseClicked="#btnLoadInventoryManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/inventory.png" />
                </image>
@@ -45,7 +37,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="279.0" onMouseClicked="#btnLoadSupplierManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="29.0" layoutY="293.0" onMouseClicked="#btnLoadSupplierManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/supplier.png" />
                </image>
@@ -53,17 +45,9 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="344.0" onMouseClicked="#btnLoadOrderDetailPageOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="29.0" layoutY="382.0" onMouseClicked="#btnLoadOrderDetailPageOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/checkout.png" />
-               </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </ImageView>
-            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="411.0" onMouseClicked="#btnLoadReportManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../assets/sales-report.png" />
                </image>
                <cursor>
                   <Cursor fx:constant="HAND" />

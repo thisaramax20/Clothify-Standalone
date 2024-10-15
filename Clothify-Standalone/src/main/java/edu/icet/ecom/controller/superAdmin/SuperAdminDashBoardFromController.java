@@ -11,6 +11,7 @@ import java.io.IOException;
 
 public class SuperAdminDashBoardFromController {
     public static Stage stage = LandingPageController.getStage();
+
     public void btnLoadHomePageOnAction(MouseEvent mouseEvent) {
         return;
     }
@@ -73,7 +74,6 @@ public class SuperAdminDashBoardFromController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public void btnLoadAccountSettingsPageOnAction(MouseEvent mouseEvent) {
