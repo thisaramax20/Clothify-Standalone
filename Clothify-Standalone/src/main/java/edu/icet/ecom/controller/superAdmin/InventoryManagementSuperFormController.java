@@ -179,7 +179,7 @@ public class InventoryManagementSuperFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setSizeValuesToCombo();
         setCategoryValuesToCombo();
-        colID.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
+//        colID.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));

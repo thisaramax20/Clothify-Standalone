@@ -42,7 +42,7 @@ public class AdminManagementSuperFormController implements Initializable {
     public TableView<Admin> tblAdminDetals;
     public JFXTextField txtTelephone;
     AdminServiceImpl adminService = ServiceFactory.getInstance().getServiceType(ServiceType.ADMIN);
-    public static Stage stage = LandingPageController.getStage();
+    private final Stage stage = LandingPageController.getStage();
 
     public void btnLoadHomePageOnAction(MouseEvent mouseEvent) {
         stage.close();
@@ -52,10 +52,6 @@ public class AdminManagementSuperFormController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void btnLoadAdminManagementPageOnAction(MouseEvent mouseEvent) {
-        return;
     }
 
     public void btnLoadEmployeeManagementPageOnAction(MouseEvent mouseEvent) {
@@ -74,7 +70,7 @@ public class AdminManagementSuperFormController implements Initializable {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../../../../../view/superAdmin/inventoryManagementSuper.fxml"))));
             stage.show();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException();
         }
     }
 
@@ -109,8 +105,8 @@ public class AdminManagementSuperFormController implements Initializable {
     }
 
     public void btnAddAdminOnAction(ActionEvent actionEvent) {
-        boolean executed = adminService.save(new Admin(null, txtNIC.getText(),
-                txtId.getText(),
+        boolean executed = adminService.save(new Admin(null, null,
+                txtNIC.getText(),
                 txtName.getText(),
                 txtAddress.getText(),
                 txtDOB.getValue(),
@@ -119,43 +115,48 @@ public class AdminManagementSuperFormController implements Initializable {
                 txtEmail.getText()
         ));
         if (executed){
-            new Alert(Alert.AlertType.INFORMATION,"Success").show();
+            new Alert(Alert.AlertType.INFORMATION,"Successfully added").show();
             loadTable();
         }else{
-            new Alert(Alert.AlertType.ERROR,"Error").show();
+            new Alert(Alert.AlertType.ERROR,"Please try again.").show();
         }
     }
 
     public void btnDeleteAdminOnAction(ActionEvent actionEvent) {
         boolean executed = adminService.delete(txtId.getText());
         if (executed){
-            new Alert(Alert.AlertType.INFORMATION,"Success").show();
+            new Alert(Alert.AlertType.INFORMATION,"Successfully deleted").show();
             loadTable();
         }else{
-            new Alert(Alert.AlertType.ERROR,"Error").show();
+            new Alert(Alert.AlertType.ERROR,"Not deleted. Please try again.").show();
         }
     }
 
     public void btnUpdateAdminOnAction(ActionEvent actionEvent) {
-        boolean executed = adminService.update(new Admin(null, txtNIC.getText(),
-                txtId.getText(),
+        boolean executed = adminService.update(new Admin(null,txtId.getText(),
+                txtNIC.getText(),
                 txtName.getText(),
                 txtAddress.getText(),
                 txtDOB.getValue(),
                 txtTelephone.getText(),
-                txtEmail.getText(),
-                txtPassword.getText()
+                txtPassword.getText(),
+                txtEmail.getText()
         ));
         if (executed){
-            new Alert(Alert.AlertType.INFORMATION,"Success").show();
+            new Alert(Alert.AlertType.INFORMATION,"Successfully updated").show();
             loadTable();
         }else{
-            new Alert(Alert.AlertType.ERROR,"Error").show();
+            new Alert(Alert.AlertType.ERROR,"Not updated. Please try again.").show();
         }
     }
 
     public void btnSearchAdminOnAction(ActionEvent actionEvent) {
-        adminService.getById((txtId.getText()));
+        Admin byId = adminService.getById((txtId.getText()));
+        if (byId != null) {
+            setSelectedValues(byId);
+        }else {
+            new Alert(Alert.AlertType.ERROR,"There is no one by that username.").show();
+        }
     }
 
     public void btnClearFieldsOnAction(ActionEvent actionEvent) {
@@ -172,12 +173,13 @@ public class AdminManagementSuperFormController implements Initializable {
     }
 
     private void setSelectedValues(Admin admin ){
-        txtId.setText(admin.getId().toString());
+        txtId.setText(admin.getUsername());
         txtName.setText(admin.getName());
         txtNIC.setText(admin.getNic());
         txtAddress.setText(admin.getAddress());
         txtEmail.setText(admin.getEmail());
         txtDOB.setValue(admin.getDob());
+        txtTelephone.setText(admin.getTelephone());
     }
 
     private void loadTable(){
@@ -195,7 +197,7 @@ public class AdminManagementSuperFormController implements Initializable {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colNIC.setCellValueFactory(new PropertyValueFactory<>("nic"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        //loadTable();
+        loadTable();
         tblAdminDetals.getSelectionModel().selectedItemProperty().addListener((observableValue, previous, current) -> {
             if (current!=null) setSelectedValues(current);
         });

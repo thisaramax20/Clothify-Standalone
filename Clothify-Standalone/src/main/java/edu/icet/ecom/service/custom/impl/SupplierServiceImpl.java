@@ -46,7 +46,8 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public Supplier getById(String supplierCode) {
-        return new ModelMapper().map(supplierDao.getById(supplierCode), Supplier.class);
+        edu.icet.ecom.entity.Supplier byId = supplierDao.getById(supplierCode);
+        return byId!=null ? new ModelMapper().map(byId, Supplier.class):null;
     }
 
     @Override

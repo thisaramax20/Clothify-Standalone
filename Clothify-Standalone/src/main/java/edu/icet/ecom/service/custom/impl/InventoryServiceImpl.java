@@ -86,8 +86,8 @@ public class InventoryServiceImpl implements InventoryService {
         for (Inventory inventory :getAll()){
             if (inventory.getId().getItemCode().equals(id)) supplierId = inventory.getId().getSupplierId();
         }
-        return new ModelMapper().map(inventoryDao.searchByCompositePK(new CompositePK_SupplierItem(supplierId,
-                id)), Inventory.class);
+        edu.icet.ecom.entity.Inventory inventory = inventoryDao.searchByCompositePK(new CompositePK_SupplierItem(supplierId, id));
+        return inventory!=null ? new ModelMapper().map(inventory, Inventory.class) : null;
     }
 
     @Override

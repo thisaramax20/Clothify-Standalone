@@ -9,7 +9,7 @@ import lombok.Getter;
 import java.io.IOException;
 
 public class LandingPageController {
-    public static Stage stage;
+    private static Stage stage;
 
     public void btnLoadLoginFormOnAction(ActionEvent actionEvent) {
         try {

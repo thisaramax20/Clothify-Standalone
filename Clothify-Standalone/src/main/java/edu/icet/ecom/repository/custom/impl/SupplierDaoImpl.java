@@ -1,5 +1,6 @@
 package edu.icet.ecom.repository.custom.impl;
 
+import edu.icet.ecom.entity.Employee;
 import edu.icet.ecom.entity.Inventory;
 import edu.icet.ecom.entity.Supplier;
 import edu.icet.ecom.repository.custom.SupplierDao;
@@ -57,7 +58,9 @@ public class SupplierDaoImpl implements SupplierDao {
     public Supplier getById(String id) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Supplier supplier = session.find(Supplier.class, id);
+        Supplier supplier = session.createQuery("SELECT a FROM Supplier a WHERE a.supplierCode=:supplierCode", Supplier.class)
+                .setParameter("supplierCode", id)
+                .getSingleResultOrNull();
         session.close();
         return supplier;
     }

@@ -45,7 +45,7 @@ public class SupplierManagementFormController implements Initializable {
     public TableColumn colItemName;
     public TableColumn colItemCategory;
     public JFXComboBox<String> cmbItemCategory;
-    public static Stage stage = LandingPageController.getStage();
+    private final Stage stage = LandingPageController.getStage();
     public JFXTextField txtId;
     public JFXTextField txtItemCode;
     SupplierServiceImpl supplierService = ServiceFactory.getInstance().getServiceType(ServiceType.SUPPLIER);
@@ -123,7 +123,7 @@ public class SupplierManagementFormController implements Initializable {
         boolean executed = supplierItemService.update(new SupplierItem(cmbSupplierId.getValue(),
                 txtItemCode.getText()
                 , txtItemName.getText(), cmbItemCategory.getValue()), new CompositePK_SupplierItem(cmbSupplierId.getValue(),
-                txtItemCode.getText()));
+                txtItemCode.getText()),txtItemName.getText(),cmbItemCategory.getValue());
         if (executed){
             new Alert(Alert.AlertType.INFORMATION,"Success").show();
             loadTable2();
@@ -133,9 +133,11 @@ public class SupplierManagementFormController implements Initializable {
     }
 
     public void btnSearchItemOnAction(ActionEvent actionEvent) {
-        supplierItemService.getById(new CompositePK_SupplierItem(cmbSupplierId.getValue(),
+        SupplierItem byId = supplierItemService.getById(new CompositePK_SupplierItem(cmbSupplierId.getValue(),
                 txtItemCode.getText()
         ));
+        if (byId!=null) setSelectedValues2(byId);
+        else new Alert(Alert.AlertType.ERROR,"There is no item by that code").show();
     }
 
     public void btnClearFieldsOnAction(ActionEvent actionEvent) {
@@ -164,7 +166,8 @@ public class SupplierManagementFormController implements Initializable {
     }
 
     public void btnAddSupplierOnAction(ActionEvent actionEvent) {
-        boolean executed = supplierService.save(new Supplier(null, txtNIC.getText(),null,
+        boolean executed = supplierService.save(new Supplier(null, null,
+                txtNIC.getText(),
                 txtName.getText(),
                 txtCompany.getText()
         ));
@@ -202,7 +205,9 @@ public class SupplierManagementFormController implements Initializable {
     }
 
     public void btnSearchSupplierOnAction(ActionEvent actionEvent) {
-        setSelectedvalues(supplierService.getById(txtId.getText()));
+        Supplier byId = supplierService.getById(txtId.getText());
+        if (byId!=null) setSelectedvalues(byId);
+        else new Alert(Alert.AlertType.ERROR,"There is no one by that id.").show();
     }
 
     private void loadTable(){
@@ -213,7 +218,7 @@ public class SupplierManagementFormController implements Initializable {
     }
 
     private void setSelectedvalues(Supplier supplier){
-        txtId.setText(supplier.getId().toString());
+        txtId.setText(supplier.getSupplierCode());
         txtNIC.setText(supplier.getNic());
         txtName.setText(supplier.getName());
         txtCompany.setText(supplier.getCompany());
@@ -236,7 +241,7 @@ public class SupplierManagementFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colID.setCellValueFactory(new PropertyValueFactory<>("supplierCode"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colCompany.setCellValueFactory(new PropertyValueFactory<>("company"));
         colNIC.setCellValueFactory(new PropertyValueFactory<>("nic"));

@@ -38,10 +38,14 @@ public class InventoryDaoImpl implements InventoryDao {
         Inventory inventory = session.get(Inventory.class,entity.getId());
         inventory.setCategory(entity.getCategory());
         inventory.setName(entity.getName());
-        inventory.setQuantity(entity.getQuantity());
-        inventory.setSize(entity.getSize());
-        inventory.setPrice(entity.getPrice());
-        inventory.setImageData(entity.getImageData());
+        Integer quantity = entity.getQuantity();
+        if (quantity!=null) inventory.setQuantity(quantity);
+        String size = entity.getSize();
+        if (size!=null) inventory.setSize(size);
+        Double price = entity.getPrice();
+        if (price!=null) inventory.setPrice(price);
+        byte[] imageData = entity.getImageData();
+        if (imageData!=null) inventory.setImageData(imageData);
         session.merge(inventory);
         session.getTransaction().commit();
         session.close();

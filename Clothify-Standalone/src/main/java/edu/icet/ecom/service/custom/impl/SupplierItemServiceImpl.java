@@ -19,6 +19,7 @@ import java.util.List;
 
 public class SupplierItemServiceImpl implements SupplierItemService {
     SupplierItemDaoImpl supplierItemDao = DaoFactory.getInstance().getDaoType(DaoType.SUPPLIERITEM);
+    InventoryServiceImpl inventoryService = ServiceFactory.getInstance().getServiceType(ServiceType.INVENTORY);
 
     @Override
     public boolean save(SupplierItem supplierItem) {
@@ -35,7 +36,6 @@ public class SupplierItemServiceImpl implements SupplierItemService {
         supplierItem1.setCompositePKSupplierItem(compositePKSupplierItem);
         boolean executed = supplierItemDao.save(supplierItem1);
         if (executed){
-            InventoryServiceImpl inventoryService = ServiceFactory.getInstance().getServiceType(ServiceType.INVENTORY);
             return inventoryService.save(new edu.icet.ecom.dto.Inventory(compositePKSupplierItem,
                     supplierItem.getName(),
                     null, null, supplierItem.getCategory(),
@@ -46,12 +46,23 @@ public class SupplierItemServiceImpl implements SupplierItemService {
 
     @Override
     public boolean delete(CompositePK_SupplierItem compositePKSupplierItem) {
-        return supplierItemDao.deleteCompositePK(compositePKSupplierItem);
+        boolean executed = supplierItemDao.deleteCompositePK(compositePKSupplierItem);
+        if (executed){
+            return inventoryService.delete(compositePKSupplierItem.getItemCode());
+        }else return false;
     }
 
     @Override
-    public boolean update(SupplierItem supplierItem, CompositePK_SupplierItem compositePKSupplierItem ) {
-        return supplierItemDao.updateCompositePK(new ModelMapper().map(supplierItem, edu.icet.ecom.entity.SupplierItem.class),compositePKSupplierItem);
+    public boolean update(SupplierItem supplierItem, CompositePK_SupplierItem compositePKSupplierItem,String itemName,String category) {
+        boolean executed = supplierItemDao.updateCompositePK(new ModelMapper().map(supplierItem, edu.icet.ecom.entity.SupplierItem.class), compositePKSupplierItem);
+        if (executed){
+            return inventoryService.update(new edu.icet.ecom.dto.Inventory(compositePKSupplierItem,
+                    itemName,
+                    null, null, category,
+                    null, null,
+                    null,null)
+            );
+        }else return false;
     }
 
     @Override
@@ -64,6 +75,7 @@ public class SupplierItemServiceImpl implements SupplierItemService {
 
     @Override
     public SupplierItem getById(CompositePK_SupplierItem compositePKSupplierItem) {
-        return new ModelMapper().map(supplierItemDao.getByCompositePK(compositePKSupplierItem),SupplierItem.class);
+        edu.icet.ecom.entity.SupplierItem supplierItem = supplierItemDao.getByCompositePK(compositePKSupplierItem);
+        return supplierItem!=null ? new ModelMapper().map(supplierItem,SupplierItem.class) :null;
     }
 }

@@ -40,7 +40,8 @@ public class EmployeeManagementSuperFormController implements Initializable {
     public TableColumn colEmail;
     public JFXTextField txtId;
     EmployeeServiceImpl employeeService = ServiceFactory.getInstance().getServiceType(ServiceType.EMPLOYEE);
-    public static Stage stage = LandingPageController.getStage();
+    private final Stage stage = LandingPageController.getStage();
+    private final String error = "There was an error. Please try again or contact your supervisor.";
 
     public void btnLoadHomePageOnAction(MouseEvent mouseEvent) {
         stage.close();
@@ -107,8 +108,8 @@ public class EmployeeManagementSuperFormController implements Initializable {
     }
 
     public void btnAddEmployeeOnAction(ActionEvent actionEvent) {
-        boolean executed = employeeService.save(new Employee(null,txtNIC.getText(),
-                null,
+        boolean executed = employeeService.save(new Employee(null,null,
+                txtNIC.getText(),
                 txtName.getText(),
                 txtAddress.getText(),
                 txtDOB.getValue(),
@@ -118,7 +119,7 @@ public class EmployeeManagementSuperFormController implements Initializable {
             new Alert(Alert.AlertType.INFORMATION,"Successfully added.🆗").show();
             loadTable();
         }else {
-            new Alert(Alert.AlertType.ERROR, "There was an error. Please try again or contact your supervisor.").show();
+            new Alert(Alert.AlertType.ERROR, error).show();
         }
     }
 
@@ -128,13 +129,13 @@ public class EmployeeManagementSuperFormController implements Initializable {
             new Alert(Alert.AlertType.INFORMATION,"Successfully deleted.🆗").show();
             loadTable();
         }else {
-            new Alert(Alert.AlertType.ERROR, "There was an error. Please try again or contact your supervisor.").show();
+            new Alert(Alert.AlertType.ERROR, error).show();
         }
     }
 
     public void btnUpdateEmployeeOnAction(ActionEvent actionEvent) {
-        boolean executed = employeeService.update(new Employee(null,txtNIC.getText(),
-                txtId.getText(),
+        boolean executed = employeeService.update(new Employee(null,txtId.getText(),
+                txtNIC.getText(),
                 txtName.getText(),
                 txtAddress.getText(),
                 txtDOB.getValue(),
@@ -144,7 +145,7 @@ public class EmployeeManagementSuperFormController implements Initializable {
             new Alert(Alert.AlertType.INFORMATION,"Successfully updated.🆗").show();
             loadTable();
         }else {
-            new Alert(Alert.AlertType.ERROR, "There was an error. Please try again or contact your supervisor.").show();
+            new Alert(Alert.AlertType.ERROR, error).show();
         }
     }
 
@@ -177,7 +178,7 @@ public class EmployeeManagementSuperFormController implements Initializable {
     }
 
     private void setSelectedFields(Employee employee){
-        txtId.setText(employee.getId().toString());
+        txtId.setText(employee.getUsername());
         txtName.setText(employee.getName());
         txtNIC.setText(employee.getNic());
         txtAddress.setText(employee.getAddress());

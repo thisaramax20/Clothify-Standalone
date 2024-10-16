@@ -23,7 +23,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public boolean delete(String id) {
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
-        Employee employee = session.get(Employee.class, id);
+        Employee employee = getById(id);
         session.remove(employee);
         session.getTransaction().commit();
         session.close();

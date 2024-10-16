@@ -27,7 +27,7 @@ public class AdminServiceImpl implements AdminService {
             i++;
             admin1.setUsername("AD-"+i);
         }
-//        admin1.setUsername("MN-EX-01");
+//        admin1.setUsername("MN-01");
         return adminDao.save(admin1);
     }
 
@@ -53,7 +53,8 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Admin getById(String username) {
-        return new ModelMapper().map(adminDao.getById(username),Admin.class);
+        edu.icet.ecom.entity.Admin admin = adminDao.getById(username);
+        return admin!=null ? new ModelMapper().map(admin,Admin.class):null;
     }
 
     @Override

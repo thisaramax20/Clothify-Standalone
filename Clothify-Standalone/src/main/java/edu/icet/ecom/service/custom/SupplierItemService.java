@@ -9,7 +9,7 @@ import java.util.List;
 public interface SupplierItemService extends SuperService {
     boolean save(SupplierItem supplierItem);
     boolean delete(CompositePK_SupplierItem compositePKSupplierItem);
-    boolean update(SupplierItem supplierItem,CompositePK_SupplierItem compositePKSupplierItem);
+    boolean update(SupplierItem supplierItem,CompositePK_SupplierItem compositePKSupplierItem,String itemName,String category);
     List<SupplierItem> getAll();
     SupplierItem getById(CompositePK_SupplierItem compositePKSupplierItem );
 }

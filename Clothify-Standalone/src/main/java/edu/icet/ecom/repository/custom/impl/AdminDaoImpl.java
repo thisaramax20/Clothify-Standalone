@@ -38,8 +38,9 @@ public class AdminDaoImpl implements AdminDao {
         admin.setName(entity.getName());
         admin.setAddress(entity.getAddress());
         admin.setDob(entity.getDob());
+        System.out.println(entity.getEmail());
         admin.setEmail(entity.getEmail());
-        admin.setHashedPassword(entity.getHashedPassword());
+        if (entity.getHashedPassword()!=null) admin.setHashedPassword(entity.getHashedPassword());
         session.merge(admin);
         session.getTransaction().commit();
         session.close();

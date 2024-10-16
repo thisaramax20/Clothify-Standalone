@@ -45,6 +45,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getById(String username) {
-        return new ModelMapper().map(employeeDao.getById(username),Employee.class);
+        edu.icet.ecom.entity.Employee employeeDaoById = employeeDao.getById(username);
+        return employeeDaoById!=null?new ModelMapper().map(employeeDaoById,Employee.class):null;
     }
 }

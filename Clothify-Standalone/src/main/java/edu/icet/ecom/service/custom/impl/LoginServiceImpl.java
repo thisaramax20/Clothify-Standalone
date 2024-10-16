@@ -15,6 +15,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public boolean validateUser(String username, String password) {
         Admin admin = adminDao.getById(username);
+        if(admin==null) return false;
         String hashedPassword = admin.getHashedPassword();
         return EncryptPassword.checkPassword(password,hashedPassword);
     }
