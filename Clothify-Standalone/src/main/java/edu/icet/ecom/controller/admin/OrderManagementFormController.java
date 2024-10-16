@@ -242,4 +242,14 @@ public class OrderManagementFormController implements Initializable {
         colQuantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         colItemCode.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
     }
+
+    public void btnNextOrderOnAction(ActionEvent actionEvent) {
+        stage.close();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../../../../../view/admin/orderManagement.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

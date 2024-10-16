@@ -14,21 +14,21 @@
             <Image url="@../assets/bg.jpg" />
          </image>
       </ImageView>
-      <Label layoutX="221.0" layoutY="89.0" text="WELCOME">
+      <Label layoutX="233.0" layoutY="90.0" text="WELCOME">
          <font>
-            <Font name="System Bold" size="32.0" />
+            <Font name="Britannic Bold" size="32.0" />
          </font>
       </Label>
-      <Label layoutX="170.0" layoutY="177.0" text="CLOTHIFY STORE">
+      <Label layoutX="179.0" layoutY="165.0" text="CLOTHIFY STORE">
          <font>
-            <Font name="System Bold" size="32.0" />
+            <Font name="Berlin Sans FB Bold" size="32.0" />
          </font>
       </Label>
-      <Label layoutX="232.0" layoutY="224.0" text="PANADURA">
+      <Label layoutX="246.0" layoutY="224.0" text="PANADURA">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="Britannic Bold" size="24.0" />
          </font>
       </Label>
-      <JFXButton layoutX="257.0" layoutY="308.0" onAction="#btnLoadLoginFormOnAction" prefHeight="26.0" prefWidth="85.0" text="Login" />
+      <JFXButton layoutX="268.0" layoutY="299.0" onAction="#btnLoadLoginFormOnAction" prefHeight="26.0" prefWidth="85.0" style="-fx-background-color: #227093;" text="Login" />
    </children>
 </AnchorPane>

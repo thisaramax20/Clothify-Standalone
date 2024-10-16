@@ -37,7 +37,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="207.0" onMouseClicked="#btnLoadInventoryManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="28.0" layoutY="207.0" onMouseClicked="#btnLoadInventoryManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/inventory.png" />
                </image>
@@ -45,7 +45,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="279.0" onMouseClicked="#btnLoadSupplierManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="31.0" layoutY="279.0" onMouseClicked="#btnLoadSupplierManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/supplier.png" />
                </image>
@@ -53,7 +53,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="344.0" onMouseClicked="#btnLoadOrderDetailPageOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="29.0" layoutY="344.0" onMouseClicked="#btnLoadOrderDetailPageOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/checkout.png" />
                </image>
@@ -61,7 +61,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="411.0" onMouseClicked="#btnLoadReportManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="31.0" layoutY="411.0" onMouseClicked="#btnLoadReportManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/sales-report.png" />
                </image>
@@ -81,7 +81,7 @@
             <JFXTextField fx:id="txtTempNewPassword" layoutX="151.0" layoutY="184.0" />
             <Label layoutX="151.0" layoutY="237.0" text="Confirm New Password" />
             <JFXTextField fx:id="txtNewPassword" layoutX="151.0" layoutY="251.0" />
-            <JFXButton layoutX="193.0" layoutY="337.0" onAction="#btnProceedOnAction" text="Proceed" />
+            <JFXButton layoutX="193.0" layoutY="337.0" onAction="#btnProceedOnAction" style="-fx-background-color: #ffda79;" text="Proceed" />
          </children>
       </AnchorPane>
    </center>

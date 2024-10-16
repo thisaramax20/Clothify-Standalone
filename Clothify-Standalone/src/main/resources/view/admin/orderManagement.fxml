@@ -11,6 +11,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.ecom.controller.admin.OrderManagementFormController">
    <left>
@@ -62,13 +63,13 @@
    <center>
       <AnchorPane prefHeight="367.0" prefWidth="441.0" style="-fx-background-color: #F6CDCD;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="37.0" layoutY="43.0" text="Customer Eamil" />
-            <JFXTextField fx:id="txtCustomerEmail" layoutX="37.0" layoutY="52.0" />
-            <Label layoutX="216.0" layoutY="42.0" text="Item Code" />
-            <Label layoutX="37.0" layoutY="91.0" text="Price" />
-            <JFXTextField fx:id="txtPrice" layoutX="37.0" layoutY="112.0" />
-            <Label layoutX="333.0" layoutY="399.0" text="Transaction Type" />
-            <TableView fx:id="tblOrders" layoutX="28.0" layoutY="151.0" prefHeight="126.0" prefWidth="397.0">
+            <Label layoutX="40.0" layoutY="48.0" text="Customer Email" />
+            <JFXTextField fx:id="txtCustomerEmail" layoutX="40.0" layoutY="57.0" prefHeight="26.0" prefWidth="122.0" />
+            <Label layoutX="200.0" layoutY="49.0" text="Item Code" />
+            <Label layoutX="40.0" layoutY="96.0" text="Price" />
+            <JFXTextField fx:id="txtPrice" layoutX="40.0" layoutY="117.0" prefHeight="26.0" prefWidth="125.0" />
+            <Label layoutX="289.0" layoutY="372.0" text="Transaction Type" />
+            <TableView fx:id="tblOrders" layoutX="37.0" layoutY="152.0" prefHeight="126.0" prefWidth="397.0">
                <columns>
                   <TableColumn fx:id="colItemCode" prefWidth="88.79998970031738" text="Item Code" />
                   <TableColumn fx:id="colDescription" prefWidth="139.99999237060547" text="Description" />
@@ -76,35 +77,60 @@
                   <TableColumn fx:id="colQuantity" prefWidth="93.5999755859375" text="Quantity" />
                </columns>
             </TableView>
-            <JFXButton layoutX="97.0" layoutY="286.0" onAction="#btnDeleteItemOnAction" prefHeight="26.0" prefWidth="69.0" text="Delete" />
-            <JFXButton layoutX="321.0" layoutY="286.0" onAction="#btnClearFieldsOnAction" prefHeight="26.0" prefWidth="69.0" text="Clear" />
-            <JFXComboBox fx:id="cmbItemCode" layoutX="212.0" layoutY="52.0" />
-            <Label layoutX="21.0" layoutY="4.0" text="Admin ID : " />
-            <Label fx:id="lblAdminID" layoutX="81.0" layoutY="4.0" text="001" />
-            <Label layoutX="111.0" layoutY="4.0" text="Admin Name : " />
-            <Label fx:id="lblAdminName" layoutX="190.0" layoutY="4.0" text="001" />
-            <Label layoutX="97.0" layoutY="20.0" text="Date : " />
-            <Label fx:id="lblDate" layoutX="137.0" layoutY="20.0" text="001" />
-            <JFXComboBox fx:id="cmbTransactionType" layoutX="333.0" layoutY="420.0" />
-            <JFXButton layoutX="440.0" layoutY="124.0" onAction="#btnAddItemOnAction" prefHeight="26.0" prefWidth="69.0" text="Add" />
-            <JFXButton layoutX="386.0" layoutY="332.0" onAction="#btnProceedToNetTotalOnAction" prefHeight="26.0" prefWidth="69.0" text="Proceed" />
-            <Label layoutX="320.0" layoutY="372.0" text="Net Total" />
-            <Label fx:id="lblNetTotal" layoutX="378.0" layoutY="372.0" text="1000.00" />
-            <JFXButton layoutX="400.0" layoutY="432.0" onAction="#btnPayementCompleteOnAction" prefHeight="26.0" prefWidth="114.0" text="Payment Done" />
-            <Label layoutX="189.0" layoutY="20.0" text="Time : " />
-            <Label fx:id="lblTime" layoutX="229.0" layoutY="20.0" text="001" />
-            <Label layoutX="211.0" layoutY="91.0" text="Description" />
-            <JFXTextField fx:id="txtItemDescription" layoutX="203.0" layoutY="112.0" prefHeight="26.0" prefWidth="102.0" />
-            <Label layoutX="315.0" layoutY="40.0" text="Quantity" />
-            <JFXTextField fx:id="txtIQuantity" layoutX="307.0" layoutY="53.0" />
-            <Label layoutX="377.0" layoutY="14.0" text="Order ID : " />
-            <Label fx:id="lblOrderID" layoutX="432.0" layoutY="14.0" text="001" />
-            <Label layoutX="337.0" layoutY="90.0" text="Stock available" />
-            <JFXTextField fx:id="txtIStockAvailble" layoutX="340.0" layoutY="108.0" prefHeight="26.0" prefWidth="67.0" />
-            <JFXButton layoutX="16.0" layoutY="432.0" onAction="#btnSearchOrderOnAction" prefHeight="26.0" prefWidth="69.0" text="Search" />
-            <JFXButton layoutX="101.0" layoutY="432.0" onAction="#btnCancelOrderOnAction" prefHeight="26.0" prefWidth="98.0" text="Cancel Order" />
+            <JFXButton layoutX="56.0" layoutY="286.0" onAction="#btnDeleteItemOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ff5252;" text="Delete" />
+            <JFXButton layoutX="181.0" layoutY="286.0" onAction="#btnClearFieldsOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ccae62;" text="Clear" />
+            <JFXComboBox fx:id="cmbItemCode" layoutX="201.0" layoutY="57.0" />
+            <Label layoutX="9.0" layoutY="1.0" text="Admin ID : ">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Label>
+            <Label fx:id="lblAdminID" layoutX="81.0" layoutY="1.0" text="001">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Label>
+            <Label layoutX="140.0" layoutY="1.0" text="Admin Name : ">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Label>
+            <Label fx:id="lblAdminName" layoutX="234.0" layoutY="1.0" text="001">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Label>
+            <Label layoutX="33.0" layoutY="20.0" text="Date : " />
+            <Label fx:id="lblDate" layoutX="73.0" layoutY="20.0" text="001" />
+            <JFXComboBox fx:id="cmbTransactionType" layoutX="292.0" layoutY="406.0" />
+            <JFXButton layoutX="440.0" layoutY="130.0" onAction="#btnAddItemOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ffda79;" text="Add" />
+            <JFXButton layoutX="440.0" layoutY="286.0" onAction="#btnProceedToNetTotalOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ffda79;" text="Proceed" />
+            <Label layoutX="320.0" layoutY="341.0" text="Net Total">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Label>
+            <Label fx:id="lblNetTotal" layoutX="378.0" layoutY="341.0" text="1000.00">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Label>
+            <JFXButton layoutX="390.0" layoutY="432.0" onAction="#btnPayementCompleteOnAction" prefHeight="26.0" prefWidth="114.0" style="-fx-background-color: #ffda79;" text="Payment Done" />
+            <Label layoutX="169.0" layoutY="20.0" text="Time : " />
+            <Label fx:id="lblTime" layoutX="209.0" layoutY="20.0" text="001" />
+            <Label layoutX="200.0" layoutY="96.0" text="Description" />
+            <JFXTextField fx:id="txtItemDescription" layoutX="201.0" layoutY="117.0" prefHeight="26.0" prefWidth="102.0" />
+            <Label layoutX="312.0" layoutY="45.0" text="Quantity" />
+            <JFXTextField fx:id="txtIQuantity" layoutX="310.0" layoutY="58.0" prefHeight="26.0" prefWidth="95.0" />
+            <Label layoutX="404.0" layoutY="5.0" text="Order ID : ">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Label>
+            <Label fx:id="lblOrderID" layoutX="469.0" layoutY="5.0" text="001">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Label>
+            <Label layoutX="312.0" layoutY="95.0" text="Stock available" />
+            <JFXTextField fx:id="txtIStockAvailble" layoutX="318.0" layoutY="116.0" prefHeight="26.0" prefWidth="67.0" />
+            <JFXButton layoutX="16.0" layoutY="432.0" onAction="#btnSearchOrderOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ccae62;" text="Search" />
+            <JFXButton layoutX="101.0" layoutY="432.0" onAction="#btnCancelOrderOnAction" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: #ff5252;" text="Cancel Order" />
             <Label layoutX="19.0" layoutY="372.0" text="Order ID" />
             <JFXTextField fx:id="txtOrderId" layoutX="18.0" layoutY="393.0" prefHeight="26.0" prefWidth="110.0" promptText="only to cancel order" />
+            <JFXButton layoutX="404.0" layoutY="28.0" onAction="#btnNextOrderOnAction" prefHeight="26.0" prefWidth="78.0" style="-fx-background-color: #ffda79;" text="Next Order" />
          </children>
       </AnchorPane>
    </center>

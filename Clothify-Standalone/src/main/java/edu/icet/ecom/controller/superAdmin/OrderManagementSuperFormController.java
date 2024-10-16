@@ -262,4 +262,14 @@ public class OrderManagementSuperFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR,"Error").show();
         }
     }
+
+    public void btnNextOrderOnAction(ActionEvent actionEvent) {
+        stage.close();
+        try {
+            stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../../../../../view/superAdmin/OrderManagementSuper.fxml"))));
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -5,25 +5,29 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.ecom.controller.LoginFormController">
    <top>
-      <AnchorPane prefHeight="98.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="98.0" prefWidth="600.0" style="-fx-background-color: #D9D9D9;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="286.0" layoutY="20.0" text="Welcome Admin" AnchorPane.leftAnchor="285.6" AnchorPane.rightAnchor="226.0" />
-            <Label layoutX="286.4" layoutY="56.0" prefHeight="18.0" prefWidth="138.0" text="Please login to continue" AnchorPane.leftAnchor="286.0" AnchorPane.rightAnchor="176.0" />
+            <Label layoutX="186.0" layoutY="17.0" prefHeight="38.0" prefWidth="228.0" text="Welcome Admin" AnchorPane.leftAnchor="186.0" AnchorPane.rightAnchor="186.79999999999995">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font></Label>
+            <Label layoutX="231.0" layoutY="65.0" prefHeight="18.0" prefWidth="138.0" text="Please login to continue" AnchorPane.leftAnchor="231.0" AnchorPane.rightAnchor="231.39999999999998" />
          </children>
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane prefHeight="242.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="242.0" prefWidth="600.0" style="-fx-background-color: #F6CDCD;" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="212.0" layoutY="36.0" text="username" AnchorPane.leftAnchor="212.0" AnchorPane.rightAnchor="336.0" />
             <JFXTextField fx:id="txtUsername" layoutX="212.0" layoutY="78.0" AnchorPane.leftAnchor="212.0" AnchorPane.rightAnchor="252.8" />
             <Label fx:id="lblPassword_OTP" layoutX="212.0" layoutY="123.0" text="password" AnchorPane.leftAnchor="212.0" AnchorPane.rightAnchor="337.6" />
             <JFXTextField fx:id="txtPassword" layoutX="212.0" layoutY="165.0" AnchorPane.leftAnchor="212.0" AnchorPane.rightAnchor="252.8" />
-            <JFXButton layoutX="274.0" layoutY="216.0" onAction="#btnLoginOnAction" text="Login" AnchorPane.leftAnchor="274.0" AnchorPane.rightAnchor="280.0" />
-            <JFXButton layoutX="453.0" layoutY="261.0" onAction="#btnForgotPasswordOnAction" prefHeight="26.0" prefWidth="117.0" text="Forgot Password " AnchorPane.leftAnchor="453.0" AnchorPane.rightAnchor="30.200000000000045" />
+            <JFXButton layoutX="274.0" layoutY="216.0" onAction="#btnLoginOnAction" prefHeight="38.0" prefWidth="70.0" style="-fx-background-color: #ffda79;" text="Login" AnchorPane.leftAnchor="274.0" AnchorPane.rightAnchor="256.0" />
+            <JFXButton layoutX="453.0" layoutY="261.0" onAction="#btnForgotPasswordOnAction" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: #ccae62;" text="Forgot Password " AnchorPane.leftAnchor="453.0" AnchorPane.rightAnchor="30.200000000000045" />
          </children>
       </AnchorPane>
    </center>

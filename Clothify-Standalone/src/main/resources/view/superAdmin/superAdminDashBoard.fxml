@@ -10,7 +10,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="474.0" prefWidth="648.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.ecom.controller.superAdmin.SuperAdminDashBoardFromController">
    <left>
-      <AnchorPane prefHeight="400.0" prefWidth="129.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="400.0" prefWidth="129.0" style="-fx-background-color: #D9D9D9;" BorderPane.alignment="CENTER">
          <children>
             <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="29.0" layoutY="14.0" onMouseClicked="#btnLoadHomePageOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -36,7 +36,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="207.0" onMouseClicked="#btnLoadInventoryManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="28.0" layoutY="209.0" onMouseClicked="#btnLoadInventoryManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/inventory.png" />
                </image>
@@ -44,7 +44,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="279.0" onMouseClicked="#btnLoadSupplierManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="32.0" layoutY="279.0" onMouseClicked="#btnLoadSupplierManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/supplier.png" />
                </image>
@@ -52,7 +52,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="344.0" onMouseClicked="#btnLoadOrderDetailPageOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="30.0" layoutY="344.0" onMouseClicked="#btnLoadOrderDetailPageOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/checkout.png" />
                </image>
@@ -60,7 +60,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </ImageView>
-            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="36.0" layoutY="411.0" onMouseClicked="#btnLoadReportManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="33.0" layoutY="411.0" onMouseClicked="#btnLoadReportManagementPageOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/sales-report.png" />
                </image>
@@ -72,9 +72,9 @@
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="474.0" prefWidth="77.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="474.0" prefWidth="77.0" style="-fx-background-color: #D9D9D9;" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="18.0" layoutY="30.0" onMouseClicked="#btnLoadAccountSettingsPageOnAction" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="59.0" fitWidth="57.0" layoutX="10.0" layoutY="14.0" onMouseClicked="#btnLoadAccountSettingsPageOnAction" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/account.png" />
                </image>
@@ -94,7 +94,7 @@
       </AnchorPane>
    </right>
    <center>
-      <AnchorPane prefHeight="367.0" prefWidth="441.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="367.0" prefWidth="441.0" style="-fx-background-color: #F6CDCD;" BorderPane.alignment="CENTER">
          <children>
             <Label layoutX="86.0" layoutY="27.0" text="WELCOME MANAGER">
                <font>

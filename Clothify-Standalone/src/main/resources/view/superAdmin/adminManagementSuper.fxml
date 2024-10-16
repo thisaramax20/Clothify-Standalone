@@ -101,17 +101,17 @@
                   <TableColumn fx:id="colEmail" prefWidth="79.20001831054685" text="Email" />
               </columns>
             </TableView>
-            <JFXButton layoutX="33.0" layoutY="435.0" onAction="#btnAddAdminOnAction" prefHeight="26.0" prefWidth="69.0" text="Add" />
-            <JFXButton layoutX="111.0" layoutY="435.0" onAction="#btnDeleteAdminOnAction" prefHeight="26.0" prefWidth="69.0" text="Delete" />
-            <JFXButton layoutX="181.0" layoutY="435.0" onAction="#btnUpdateAdminOnAction" prefHeight="26.0" prefWidth="69.0" text="Update" />
-            <JFXButton layoutX="259.0" layoutY="435.0" onAction="#btnSearchAdminOnAction" prefHeight="26.0" prefWidth="69.0" text="Search" />
-            <JFXButton layoutX="335.0" layoutY="435.0" onAction="#btnClearFieldsOnAction" prefHeight="26.0" prefWidth="69.0" text="Clear" />
+            <JFXButton layoutX="33.0" layoutY="435.0" onAction="#btnAddAdminOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ffda79;" text="Add" />
+            <JFXButton layoutX="121.0" layoutY="435.0" onAction="#btnDeleteAdminOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ff5252;" text="Delete" />
+            <JFXButton layoutX="213.0" layoutY="435.0" onAction="#btnUpdateAdminOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ffda79;" text="Update" />
+            <JFXButton layoutX="293.0" layoutY="435.0" onAction="#btnSearchAdminOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ccae62;" text="Search" />
+            <JFXButton layoutX="381.0" layoutY="435.0" onAction="#btnClearFieldsOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ccae62;" text="Clear" />
             <Label layoutX="370.0" layoutY="12.0" text="Username">
                <font>
-                  <Font name="System Italic" size="12.0" />
+                  <Font name="System Bold Italic" size="12.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="txtId" layoutX="370.0" layoutY="33.0" />
+            <JFXTextField fx:id="txtId" layoutX="370.0" layoutY="33.0" promptText="auto generated" />
             <Label layoutX="374.0" layoutY="86.0" text="Contact" />
             <JFXTextField fx:id="txtTelephone" layoutX="374.0" layoutY="107.0" />
          </children>

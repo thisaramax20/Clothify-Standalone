@@ -99,17 +99,17 @@
                   <TableColumn fx:id="colEmail" prefWidth="79.20001831054685" text="Email" />
                </columns>
             </TableView>
-            <JFXButton layoutX="33.0" layoutY="435.0" onAction="#btnAddEmployeeOnAction" prefHeight="26.0" prefWidth="69.0" text="Add" />
-            <JFXButton layoutX="111.0" layoutY="435.0" onAction="#btnDeleteEmployeeOnAction" prefHeight="26.0" prefWidth="69.0" text="Delete" />
-            <JFXButton layoutX="181.0" layoutY="435.0" onAction="#btnUpdateEmployeeOnAction" prefHeight="26.0" prefWidth="69.0" text="Update" />
-            <JFXButton layoutX="259.0" layoutY="435.0" onAction="#btnSearchEmployeeOnAction" prefHeight="26.0" prefWidth="69.0" text="Search" />
-            <JFXButton layoutX="335.0" layoutY="435.0" onAction="#btnClearFieldsOnAction" prefHeight="26.0" prefWidth="69.0" text="Clear" />
-            <Label layoutX="370.0" layoutY="68.0" text="ID">
+            <JFXButton layoutX="33.0" layoutY="435.0" onAction="#btnAddEmployeeOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ffda79;" text="Add" />
+            <JFXButton layoutX="114.0" layoutY="435.0" onAction="#btnDeleteEmployeeOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ff5252;" text="Delete" />
+            <JFXButton layoutX="194.0" layoutY="435.0" onAction="#btnUpdateEmployeeOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ffda79;" text="Update" />
+            <JFXButton layoutX="280.0" layoutY="435.0" onAction="#btnSearchEmployeeOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ccae62;" text="Search" />
+            <JFXButton layoutX="370.0" layoutY="435.0" onAction="#btnClearFieldsOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ccae62;" text="Clear" />
+            <Label layoutX="353.0" layoutY="6.0" text="ID">
                <font>
-                  <Font name="System Italic" size="12.0" />
+                  <Font name="System Bold Italic" size="12.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="txtId" layoutX="370.0" layoutY="89.0" promptText="id is auto generated. use it to find only." />
+            <JFXTextField fx:id="txtId" layoutX="353.0" layoutY="27.0" promptText="id is auto generated." />
          </children>
       </AnchorPane>
    </center>

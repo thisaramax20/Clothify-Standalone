@@ -75,9 +75,9 @@
    <center>
       <AnchorPane prefHeight="367.0" prefWidth="441.0" style="-fx-background-color: #F6CDCD;" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton layoutX="59.0" layoutY="157.0" onAction="#btnDailyReportOnAction" prefHeight="26.0" prefWidth="69.0" text="Daily" />
-            <JFXButton layoutX="137.0" layoutY="157.0" onAction="#btnMonthlyReportOnAction" prefHeight="26.0" prefWidth="69.0" text="Monthly" />
-            <JFXButton layoutX="207.0" layoutY="157.0" onAction="#btnAnnualReportOnAction" prefHeight="26.0" prefWidth="69.0" text="Annualy" />
+            <JFXButton layoutX="199.0" layoutY="132.0" onAction="#btnDailyReportOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ffda79;" text="Daily" />
+            <JFXButton layoutX="207.0" layoutY="203.0" onAction="#btnMonthlyReportOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ffda79;" text="Monthly" />
+            <JFXButton layoutX="207.0" layoutY="276.0" onAction="#btnAnnualReportOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ffda79;" text="Annualy" />
             <Label layoutX="136.0" layoutY="41.0" text="Manage Your Reports">
                <font>
                   <Font name="System Bold" size="24.0" />
