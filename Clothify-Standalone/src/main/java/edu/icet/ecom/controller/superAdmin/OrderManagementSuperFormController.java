@@ -60,7 +60,7 @@ public class OrderManagementSuperFormController implements Initializable {
     private String admin;
     OrderDetailServiceImpl orderDetail = ServiceFactory.getInstance().getServiceType(ServiceType.ORDERDETAIL);
     ObservableList<OrderDetails> orderDetailsOngoing = FXCollections.observableArrayList();
-    public static Stage stage = LandingPageController.getStage();
+    private final Stage stage = LandingPageController.getStage();
     Double total = 0.0;
     private String adminName;
     private Integer adminId;

@@ -21,7 +21,7 @@ public class AccountSettingsSuperFormController {
     public JFXTextField txtCurrentPassword;
     public JFXTextField txtTempNewPassword;
     public JFXTextField txtNewPassword;
-    public static Stage stage = LandingPageController.getStage();
+    private final Stage stage = LandingPageController.getStage();
 
     public void btnLoadHomePageOnAction(MouseEvent mouseEvent) {
         stage.close();
@@ -99,19 +99,17 @@ public class AccountSettingsSuperFormController {
         boolean executed = false;
         if(loginService.validateUser(username,txtCurrentPassword.getText())){
             String newPassword = txtNewPassword.getText();
-            if (txtTempNewPassword.getText().equals(newPassword)){
+            if (txtTempNewPassword.getText().equals(newPassword) && newPassword.length()>=8){
                 AdminServiceImpl adminService = ServiceFactory.getInstance().getServiceType(ServiceType.ADMIN);
                  executed = adminService.changePassword(username, newPassword);
+                if (executed){
+                    new Alert(Alert.AlertType.INFORMATION,"Success").show();
+                }
             }else{
-                new Alert(Alert.AlertType.ERROR,"Your new password combination does not match.").show();
+                new Alert(Alert.AlertType.ERROR,"Your new password combination does not match or password is too small.").show();
             }
         }else {
             new Alert(Alert.AlertType.ERROR,"Your old password is incorrect.").show();
-        }
-        if (executed){
-            new Alert(Alert.AlertType.INFORMATION,"Success").show();
-        }else {
-            new Alert(Alert.AlertType.ERROR,"Error").show();
         }
     }
 }

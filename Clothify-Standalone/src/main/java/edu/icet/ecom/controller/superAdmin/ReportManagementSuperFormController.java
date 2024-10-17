@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ReportManagementSuperFormController {
-    public static Stage stage = LandingPageController.getStage();
+    private final Stage stage = LandingPageController.getStage();
 
     public void btnLoadHomePageOnAction(MouseEvent mouseEvent) {
         stage.close();

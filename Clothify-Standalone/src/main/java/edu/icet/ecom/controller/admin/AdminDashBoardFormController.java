@@ -3,7 +3,6 @@ package edu.icet.ecom.controller.admin;
 import edu.icet.ecom.controller.LandingPageController;
 import edu.icet.ecom.controller.LoginFormController;
 import edu.icet.ecom.service.ServiceFactory;
-import edu.icet.ecom.service.SuperService;
 import edu.icet.ecom.service.custom.impl.AdminServiceImpl;
 import edu.icet.ecom.util.ServiceType;
 import javafx.fxml.FXML;
@@ -19,7 +18,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminDashBoardFormController implements Initializable {
-    public static Stage stage = LandingPageController.getStage();
+    private final Stage stage = LandingPageController.getStage();
 
     @FXML
     private Label lblAdminName;
@@ -92,6 +91,7 @@ public class AdminDashBoardFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         AdminServiceImpl adminService = ServiceFactory.getInstance().getServiceType(ServiceType.ADMIN);
-        lblAdminName.setText(adminService.getById(LoginFormController.username).getName());
+        String username = adminService.getById(LoginFormController.username).getName();
+        lblAdminName.setText(username.substring(0,1).toUpperCase() + username.substring(1));
     }
 }

@@ -44,7 +44,7 @@ public class InventoryManagementFormController implements Initializable {
     public ImageView imageView;
     public JFXComboBox<String> cmbSize;
     public JFXComboBox<String> cmbCategory;
-    public static Stage stage = LandingPageController.getStage();
+    private final Stage stage = LandingPageController.getStage();
     public JFXTextField txtId;
     InventoryServiceImpl service = ServiceFactory.getInstance().getServiceType(ServiceType.INVENTORY);
     private String imageFilePath;

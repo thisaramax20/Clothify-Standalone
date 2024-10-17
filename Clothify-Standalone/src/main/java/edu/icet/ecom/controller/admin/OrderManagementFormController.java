@@ -55,7 +55,7 @@ public class OrderManagementFormController implements Initializable {
     public JFXTextField txtItemDescription;
     public JFXTextField txtIQuantity;
     public Label lblOrderID;
-    public static Stage stage = LandingPageController.getStage();
+    private final Stage stage = LandingPageController.getStage();
     public JFXTextField txtIStockAvailble;
     public JFXTextField txtOrderId;
     Double total = 0.0;

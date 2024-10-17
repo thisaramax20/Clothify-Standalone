@@ -48,7 +48,7 @@ public class InventoryManagementSuperFormController implements Initializable {
     public JFXTextField txtId;
     InventoryServiceImpl service = ServiceFactory.getInstance().getServiceType(ServiceType.INVENTORY);
     private String imageFilePath;
-    public static Stage stage = LandingPageController.getStage();
+    private final Stage stage = LandingPageController.getStage();
     private Inventory inventory1;
     private List<Inventory> all;
 
