@@ -19,8 +19,8 @@ public class LoginFormController {
     public JFXTextField txtPassword;
     public static Stage stage = LandingPageController.getStage();
     LoginServiceImpl loginService = ServiceFactory.getInstance().getServiceType(ServiceType.LOGIN);
-    String otp;
-    boolean isOtp = false;
+    private String otp;
+    private static boolean isOtp = false;
     public static String username;
 
     public void btnLoginOnAction(ActionEvent actionEvent) {
@@ -78,5 +78,9 @@ public class LoginFormController {
         lblPassword_OTP.setText("OTP");
         otp = loginService.sendEmail(txtUsername.getText());
         isOtp = true;
+    }
+
+    public static boolean getIsOtp(){
+        return isOtp;
     }
 }
