@@ -10,9 +10,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 
+@Slf4j
 public class LoginFormController {
     public JFXTextField txtUsername;
     public Label lblPassword_OTP;
@@ -24,6 +26,10 @@ public class LoginFormController {
     public static String username;
 
     public void btnLoginOnAction(ActionEvent actionEvent) {
+        if (txtUsername.getText().isEmpty() || txtPassword.getText().isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"You must fill out all fields").show();
+            return;
+        }
         if (isOtp){
             if (txtPassword.getText().equals(otp)){
                 username = txtUsername.getText();
@@ -33,7 +39,7 @@ public class LoginFormController {
                         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../../../../view/admin/adminDashBoard.fxml"))));
                         stage.show();
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        e.printStackTrace();
                     }
                 }else {
                     try {
@@ -75,9 +81,14 @@ public class LoginFormController {
     }
 
     public void btnForgotPasswordOnAction(ActionEvent actionEvent) {
-        lblPassword_OTP.setText("OTP");
         otp = loginService.sendEmail(txtUsername.getText());
+        if (otp==null) {
+            new Alert(Alert.AlertType.ERROR,"Please enter a valid username").show();
+            return;
+        }
         isOtp = true;
+        new Alert(Alert.AlertType.INFORMATION,"Otp has been sent to your email.").show();
+        lblPassword_OTP.setText("OTP");
     }
 
     public static boolean getIsOtp(){

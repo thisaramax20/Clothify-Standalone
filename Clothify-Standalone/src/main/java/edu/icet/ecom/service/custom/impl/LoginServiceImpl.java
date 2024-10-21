@@ -24,7 +24,8 @@ public class LoginServiceImpl implements LoginService {
     public String sendEmail(String username) {
         Admin admin = adminDao.getById(username);
         String otp = OtpGenerator.generateOtp(6);
-        EmailSending.sendOTP(admin.getEmail(), otp);
-        return otp;
+        boolean executed = EmailSending.sendOTP(admin.getEmail(), otp);
+        if (executed) return otp;
+        return null;
     }
 }

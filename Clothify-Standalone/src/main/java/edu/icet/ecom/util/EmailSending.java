@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class EmailSending {
-    public static void sendOTP(String sender, String otp){
+    public static boolean sendOTP(String sender, String otp){
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
@@ -35,8 +35,10 @@ public class EmailSending {
             mimeMessage.setText("OTP is : "+otp);
 
             Transport.send(mimeMessage);
+            return true;
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return false;
         }
     }
 
