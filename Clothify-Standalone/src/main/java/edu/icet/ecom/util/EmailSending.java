@@ -52,6 +52,7 @@ public class EmailSending {
         String email = System.getenv("EMAIL");
         String password = System.getenv("PASSWORD");
 
+
         Session instance = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {

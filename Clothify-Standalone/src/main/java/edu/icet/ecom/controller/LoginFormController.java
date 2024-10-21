@@ -10,11 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import lombok.extern.slf4j.Slf4j;
-
 import java.io.IOException;
 
-@Slf4j
 public class LoginFormController {
     public JFXTextField txtUsername;
     public Label lblPassword_OTP;

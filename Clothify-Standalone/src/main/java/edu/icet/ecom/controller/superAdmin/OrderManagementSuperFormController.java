@@ -184,6 +184,7 @@ public class OrderManagementSuperFormController implements Initializable {
         );
         if (executed){
             new Alert(Alert.AlertType.INFORMATION,"Success").show();
+            setOrderId();
         }else{
             new Alert(Alert.AlertType.ERROR,"Error").show();
         }

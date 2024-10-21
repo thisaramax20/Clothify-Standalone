@@ -27,7 +27,7 @@ public class JasperReports {
 
             HashMap<String, Object> parameters = new HashMap<>();
             parameters.put("adminName",orders.getAdminName());
-//            parameters.put("netTotal",orders.getNetTotal());
+            parameters.put("netTotal",orders.getNetTotal());
             parameters.put("DATASET",orderDataSource);
 
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameters,orderDataSource);
@@ -35,7 +35,6 @@ public class JasperReports {
             String exportFilePath = "D:\\University\\A ICET\\Level 3\\Standalone apps\\Clothing Shop\\Application\\Clothify-Standalone\\src\\main\\resources\\jasperReports\\outputReports\\Sample.pdf";
 
             JasperExportManager.exportReportToPdfFile(jasperPrint,exportFilePath);
-            System.out.println("Successful");
             return exportFilePath;
         } catch (JRException e) {
             e.printStackTrace();
