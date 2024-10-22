@@ -9,6 +9,7 @@ import edu.icet.ecom.repository.SuperDao;
 import edu.icet.ecom.repository.custom.OrderDetailsDao;
 import edu.icet.ecom.util.DaoType;
 import edu.icet.ecom.util.HibernateUtil;
+import java.util.Collections;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -128,6 +129,7 @@ public class OrderDetailsDaoImpl implements OrderDetailsDao {
                 .setParameter("orderId", orderId)
                         .getResultList();
         session.close();
-        return orderDetails;
+        if (orderDetails!=null) return orderDetails;
+        return Collections.emptyList();
     }
 }

@@ -36,7 +36,6 @@ public class InventoryManagementSuperFormController implements Initializable {
     public JFXTextField txtPrice;
     public JFXTextField txtQuantity;
     public TableView<Inventory> tblInventory;
-    public TableColumn colID;
     public TableColumn colName;
     public TableColumn colSize;
     public TableColumn colPrice;
@@ -116,10 +115,6 @@ public class InventoryManagementSuperFormController implements Initializable {
         }
     }
 
-    public void btnAddItemOnAction(ActionEvent actionEvent) {
-
-    }
-
     public void btnDeleteItemOnAction(ActionEvent actionEvent) {
         boolean executed = service.delete(txtId.getText());
         if (executed){
@@ -179,7 +174,6 @@ public class InventoryManagementSuperFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setSizeValuesToCombo();
         setCategoryValuesToCombo();
-//        colID.setCellValueFactory(new PropertyValueFactory<>("itemCode"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));

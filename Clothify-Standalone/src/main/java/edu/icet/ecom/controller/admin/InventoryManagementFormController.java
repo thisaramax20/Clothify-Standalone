@@ -35,7 +35,6 @@ public class InventoryManagementFormController implements Initializable {
     public JFXTextField txtPrice;
     public JFXTextField txtQuantity;
     public TableView<Inventory> tblInventory;
-    public TableColumn colID;
     public TableColumn colName;
     public TableColumn colSize;
     public TableColumn colPrice;
@@ -93,9 +92,6 @@ public class InventoryManagementFormController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void btnAddItemOnAction(ActionEvent actionEvent) {
     }
 
     public void btnDeleteItemOnAction(ActionEvent actionEvent) {

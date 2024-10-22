@@ -122,7 +122,7 @@ public class SupplierManagementSuperFormController implements Initializable {
                 cmbItemCategory.getValue()
         ));
         if (executed){
-            new Alert(Alert.AlertType.INFORMATION,"Success").show();
+            new Alert(Alert.AlertType.INFORMATION,"Item added. Please edit the inventory tab for what you just added.").show();
             loadTable2();
         }else {
             new Alert(Alert.AlertType.ERROR,"Error").show();

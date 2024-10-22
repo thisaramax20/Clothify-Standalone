@@ -143,12 +143,26 @@ public class OrderManagementSuperFormController implements Initializable {
 
     public void btnSearchOrderOnAction(ActionEvent actionEvent) {
         List<OrderDetails> detailsDto = orderDetail.getOrderDetails(txtOrderId.getText());
-        ObservableList<OrderDetails> orderDetails1 = FXCollections.observableArrayList();
-        orderDetails1.addAll(detailsDto);
-        tblOrders.setItems(orderDetails1);
+        if (!detailsDto.isEmpty()) {
+            ObservableList<OrderDetails> orderDetails1 = FXCollections.observableArrayList();
+            orderDetails1.addAll(detailsDto);
+            tblOrders.setItems(orderDetails1);
+        }else new Alert(Alert.AlertType.ERROR,"There is no order by that id").show();
     }
 
     public void btnClearFieldsOnAction(ActionEvent actionEvent) {
+        clearFields();
+    }
+
+    private void clearFields(){
+        txtPrice.setText("");
+        txtItemDescription.setText("");
+        txtIStockAvailble.setText("");
+        txtOrderId.setText("");
+        txtCustomerEmail.setText("");
+        txtIQuantity.setText("");
+        cmbItemCode.setValue("");
+        cmbTransactionType.setValue("");
     }
 
     public void btnAddItemOnAction(ActionEvent actionEvent) {
@@ -184,7 +198,7 @@ public class OrderManagementSuperFormController implements Initializable {
         );
         if (executed){
             new Alert(Alert.AlertType.INFORMATION,"Success").show();
-            setOrderId();
+            nextOrder();
         }else{
             new Alert(Alert.AlertType.ERROR,"Error").show();
         }
@@ -265,10 +279,15 @@ public class OrderManagementSuperFormController implements Initializable {
     }
 
     public void btnNextOrderOnAction(ActionEvent actionEvent) {
+        nextOrder();
+    }
+
+    private void nextOrder(){
         stage.close();
         try {
             stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("../../../../../view/superAdmin/OrderManagementSuper.fxml"))));
             stage.show();
+            lblNetTotal.setText("");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

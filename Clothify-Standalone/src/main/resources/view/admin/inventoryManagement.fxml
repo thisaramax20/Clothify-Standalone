@@ -73,18 +73,16 @@
             <JFXTextField fx:id="txtQuantity" layoutX="37.0" layoutY="172.0" />
             <TableView fx:id="tblInventory" layoutX="32.0" layoutY="222.0" prefHeight="200.0" prefWidth="466.0">
                <columns>
-                  <TableColumn fx:id="colID" prefWidth="50.39990234375" text="ID" />
-                  <TableColumn fx:id="colName" prefWidth="67.20000457763672" text="Name" />
-                  <TableColumn fx:id="colSize" prefWidth="108.79998779296875" text="Size" />
-                  <TableColumn fx:id="colPrice" prefWidth="88.00006103515625" text="Price" />
-                  <TableColumn fx:id="colQuantity" prefWidth="70.39996337890625" text="Quantity" />
-                  <TableColumn fx:id="colCategory" prefWidth="79.20001831054685" text="Category" />
+                  <TableColumn fx:id="colName" prefWidth="103.99999237060547" text="Name" />
+                  <TableColumn fx:id="colSize" prefWidth="96.0" text="Size" />
+                  <TableColumn fx:id="colPrice" prefWidth="84.0" text="Price" />
+                  <TableColumn fx:id="colQuantity" prefWidth="88.00006103515625" text="Quantity" />
+                  <TableColumn fx:id="colCategory" prefWidth="94.39996337890625" text="Category" />
                </columns>
             </TableView>
-            <JFXButton layoutX="33.0" layoutY="435.0" onAction="#btnAddItemOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ffda79;" text="Add" />
-            <JFXButton layoutX="122.0" layoutY="435.0" onAction="#btnDeleteItemOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ff5252;" text="Delete" />
-            <JFXButton layoutX="209.0" layoutY="435.0" onAction="#btnUpdateItemOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ffda79;" text="Update" />
-            <JFXButton layoutX="294.0" layoutY="435.0" onAction="#btnSearchItemOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ccae62;" text="Search" />
+            <JFXButton layoutX="177.0" layoutY="435.0" onAction="#btnDeleteItemOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ff5252;" text="Delete" />
+            <JFXButton layoutX="70.0" layoutY="435.0" onAction="#btnUpdateItemOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ffda79;" text="Update" />
+            <JFXButton layoutX="280.0" layoutY="435.0" onAction="#btnSearchItemOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ccae62;" text="Search" />
             <JFXButton layoutX="387.0" layoutY="435.0" onAction="#btnClearFieldsOnAction" prefHeight="26.0" prefWidth="69.0" style="-fx-background-color: #ccae62;" text="Clear" />
             <Label layoutX="216.0" layoutY="149.0" text="Category" />
             <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="109.0" layoutX="367.0" layoutY="64.0" onMouseClicked="#btnLoadHomePageOnAction" pickOnBounds="true" preserveRatio="true">

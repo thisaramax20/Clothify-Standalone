@@ -16,6 +16,7 @@ import edu.icet.ecom.util.ServiceType;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class OrderDetailServiceImpl implements OrderDetailsService {
@@ -91,7 +92,10 @@ public class OrderDetailServiceImpl implements OrderDetailsService {
         List<OrderDetails> byIdOrderDetails = orderDetailsDao.getByIdOrderDetails(orderId);
         ArrayList<edu.icet.ecom.dto.OrderDetails> orderDetails = new ArrayList<>();
         ModelMapper mapper = new ModelMapper();
-        byIdOrderDetails.forEach(orderDetails1 -> orderDetails.add(mapper.map(orderDetails1,edu.icet.ecom.dto.OrderDetails.class)));
-        return orderDetails;
+        if (!byIdOrderDetails.isEmpty()) {
+            byIdOrderDetails.forEach(orderDetails1 -> orderDetails.add(mapper.map(orderDetails1,edu.icet.ecom.dto.OrderDetails.class)));
+            return orderDetails;
+        }
+        return Collections.emptyList();
     }
 }
