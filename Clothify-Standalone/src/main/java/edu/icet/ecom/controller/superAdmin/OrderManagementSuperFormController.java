@@ -35,6 +35,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class OrderManagementSuperFormController implements Initializable {
@@ -142,6 +143,10 @@ public class OrderManagementSuperFormController implements Initializable {
     }
 
     public void btnSearchOrderOnAction(ActionEvent actionEvent) {
+        if (Objects.equals(txtOrderId.getText(), "")){
+            new Alert(Alert.AlertType.ERROR,"Please provide the id").show();
+            return;
+        }
         List<OrderDetails> detailsDto = orderDetail.getOrderDetails(txtOrderId.getText());
         if (!detailsDto.isEmpty()) {
             ObservableList<OrderDetails> orderDetails1 = FXCollections.observableArrayList();
@@ -166,6 +171,10 @@ public class OrderManagementSuperFormController implements Initializable {
     }
 
     public void btnAddItemOnAction(ActionEvent actionEvent) {
+        if (Objects.equals(txtIQuantity.getText(), "")) {
+            new Alert(Alert.AlertType.ERROR,"Please add something first").show();
+            return;
+        }
         Integer quantity = Integer.parseInt(txtIQuantity.getText());
         if (quantity>stock){
             new Alert(Alert.AlertType.ERROR,"Stock is less than what you order.").show();
@@ -181,6 +190,10 @@ public class OrderManagementSuperFormController implements Initializable {
     }
 
     public void btnProceedToNetTotalOnAction(ActionEvent actionEvent) {
+        if (orderDetailsOngoing.isEmpty()) {
+            new Alert(Alert.AlertType.ERROR,"Please add items first").show();
+            return;
+        }
         orderDetailsOngoing.forEach(orderDetails -> {
             total+=orderDetails.getPrice()*orderDetails.getQuantity();
         });
@@ -188,6 +201,10 @@ public class OrderManagementSuperFormController implements Initializable {
     }
 
     public void btnPayementCompleteOnAction(ActionEvent actionEvent) {
+        if (cmbTransactionType.getValue()==null ||total==0.0){
+            new Alert(Alert.AlertType.ERROR,"Please check again for information").show();
+            return;
+        }
         boolean executed = orderDetail.save(new Orders(null, txtCustomerEmail.getText(),
                 lblOrderID.getText(),
                 cmbTransactionType.getValue(),
@@ -270,6 +287,10 @@ public class OrderManagementSuperFormController implements Initializable {
     }
 
     public void btnCancelOrderOnAction(ActionEvent actionEvent) {
+        if (Objects.equals(txtOrderId.getText(), "")){
+            new Alert(Alert.AlertType.ERROR,"Please search first").show();
+            return;
+        }
         boolean executed = orderDetail.delete(txtOrderId.getText());
         if (executed){
             new Alert(Alert.AlertType.INFORMATION,"Success").show();
